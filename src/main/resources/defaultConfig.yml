@@ -1,0 +1,22 @@
+# AlpsBTE-Navigator Configuration
+servers:
+  plot:
+    IP: localhost
+    port: 00000
+    enableJoinMessage: false
+    joinMessage: test
+  terra:
+    IP: localhost
+    port: 00000
+  event:
+    IP: localhost
+    port: 00000
+    currentEvent: none
+    visible: true
+    joinable: false
+    type:
+      material: firework
+      title: none
+      description: test/test/test
+      startDate: 20.02.2021 02:25 AM
+      endDate: 20.02.2021 02:25 AM

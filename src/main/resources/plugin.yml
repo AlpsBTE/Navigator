@@ -1,0 +1,24 @@
+main: github.AlpsBTE_Navigator.AlpsBTE_Navigator
+version: 2.0
+api-version: 1.12.2
+name: AlpsBTE-Navigator
+author: R3tuxn
+
+commands:
+  navigator:
+    description: open the navigator menu
+    usage: /navigator
+    permission: alpsbte.navigator
+  event:
+    description: connect to the event server
+    usage: /event
+    permission: alpsbte.joinEvent
+  nreload:
+    description: reload AlpsBTE-Navigator config file
+    usage: /nreload
+    permission: alpsbte.nreload
+
+permissions:
+  alpsbte.joinEventStaff:
+    description: permission to join event server as staff member
+    default: op
