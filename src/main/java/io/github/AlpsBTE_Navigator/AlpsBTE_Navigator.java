@@ -9,6 +9,7 @@ import github.AlpsBTE_Navigator.commands.CMD_Reload;
 import github.AlpsBTE_Navigator.core.EventListener;
 import github.AlpsBTE_Navigator.core.navigator.NavigatorMenu;
 import github.AlpsBTE_Navigator.utils.PortalManager;
+import github.AlpsBTE_Navigator.utils.Utils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -61,9 +62,9 @@ public class AlpsBTE_Navigator extends JavaPlugin implements PluginMessageListen
 
     public void UpdatePlayerCount(Player player) {
         new Thread(() -> {
-            getCount(player, "PLOT");
-            getCount(player, "TERRA");
-            getCount(player, "EVENT");
+            getCount(player, Utils.PLOT_SERVER);
+            getCount(player, Utils.TERRA_SERVER);
+            getCount(player, Utils.EVENT_SERVER);
 
             BukkitRunnable task = new BukkitRunnable() {
                 @Override
@@ -88,13 +89,13 @@ public class AlpsBTE_Navigator extends JavaPlugin implements PluginMessageListen
                 String server = in.readUTF();
 
                 switch (server.toUpperCase()) {
-                    case "PLOT":
+                    case Utils.PLOT_SERVER:
                         playerCountPLOT = in.readInt();
                         break;
-                    case "TERRA":
+                    case Utils.TERRA_SERVER:
                         playerCountTERRA = in.readInt();
                         break;
-                    case "EVENT":
+                    case Utils.EVENT_SERVER:
                         playerCountEVENT = in.readInt();
                         break;
                 }
