@@ -8,6 +8,7 @@ import github.AlpsBTE_Navigator.commands.CMD_Navigator;
 import github.AlpsBTE_Navigator.commands.CMD_Reload;
 import github.AlpsBTE_Navigator.core.EventListener;
 import github.AlpsBTE_Navigator.core.navigator.NavigatorMenu;
+import github.AlpsBTE_Navigator.utils.PortalManager;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -52,6 +53,8 @@ public class AlpsBTE_Navigator extends JavaPlugin implements PluginMessageListen
 
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
+
+        new PortalManager().start();
 
         getLogger().log(Level.INFO, "Successfully enabled AlpsBTE-Navigator plugin.");
     }
