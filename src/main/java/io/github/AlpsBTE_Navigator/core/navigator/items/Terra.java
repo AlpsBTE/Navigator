@@ -50,7 +50,7 @@ public class Terra extends NavigatorItem {
 
     @Override
     public String getVersion() {
-        return "1.12.2 - 1.16.4";
+        return "1.12.2 - 1.17";
     }
 
     @Override
