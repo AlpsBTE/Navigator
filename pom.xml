@@ -14,6 +14,12 @@
             <id>spigot-repo</id>
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
+
+        <!-- World Edit -->
+        <repository>
+            <id>nachwahl-repo</id>
+            <url>https://maven.nachwahl.dev/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -40,6 +46,21 @@
             <version>1.6.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
+
+        <!-- World Edit -->
+        <dependency>
+            <groupId>com.sk89q.worldedit</groupId>
+            <artifactId>worldedit-bukkit</artifactId>
+            <version>6.1.9</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- ParticleLib -->
+        <dependency>
+            <groupId>xyz.xenondevs</groupId>
+            <artifactId>particle</artifactId>
+            <version>1.6.3</version>
+        </dependency>
     </dependencies>
 
     <!-- Plugin Build Settings -->
@@ -56,7 +77,7 @@
         <!-- IMPORTANT: Plugin Building Path -->
         <sourceDirectory>src/main/java/io</sourceDirectory>
         <!-- IMPORTANT: Output File Name -->
-        <finalName>AlpsBTE-Navigator V2.0</finalName>
+        <finalName>AlpsBTE-Navigator V3.0</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
