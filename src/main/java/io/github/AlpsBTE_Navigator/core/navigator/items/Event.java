@@ -35,8 +35,8 @@ public class Event extends NavigatorItem {
     @Override
     public List<String> getFeatures() {
         return new ArrayList<>(Arrays.asList(
-           "§bStart: §f " + config.getString(typePath + "startData"),
-           "§bEnd: §f " + config.getString(typePath + "endDate")
+                "§bStart: §f " + config.getString(typePath + "startDate"),
+                "§bEnd: §f " + config.getString(typePath + "endDate")
         ));
     }
 
@@ -65,14 +65,14 @@ public class Event extends NavigatorItem {
         return new ItemBuilder(getMaterial(), 1)
                 .setName(getTitle())
                 .setLore(new LoreBuilder()
-                    .description(getDescription())
-                    .emptyLine()
-                    .features(getFeatures())
-                    .emptyLine()
-                    .server(serverIsOnline, AlpsBTE_Navigator.getPlugin().playerCountEVENT)
-                    .emptyLine()
-                    .version(getVersion(), isModded())
-                    .build())
+                        .description(getDescription())
+                        .emptyLine()
+                        .features(getFeatures())
+                        .emptyLine()
+                        .server(serverIsOnline, AlpsBTE_Navigator.getPlugin().playerCountEVENT)
+                        .emptyLine()
+                        .version(getVersion(), isModded())
+                        .build())
                 .setEnchantment(Enchantment.ARROW_DAMAGE)
                 .setItemFlag(ItemFlag.HIDE_ENCHANTS)
                 .build();

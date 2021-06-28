@@ -63,14 +63,14 @@ public class Plot extends NavigatorItem {
         return new ItemBuilder(getMaterial(), 1)
                 .setName(getTitle())
                 .setLore(new LoreBuilder()
-                    .description(getDescription())
-                    .emptyLine()
-                    .features(getFeatures())
-                    .emptyLine()
-                    .server(serverIsOnline, AlpsBTE_Navigator.getPlugin().playerCountPLOT)
-                    .emptyLine()
-                    .version(getVersion(), isModded())
-                    .build())
+                        .description(getDescription())
+                        .emptyLine()
+                        .features(getFeatures())
+                        .emptyLine()
+                        .server(serverIsOnline, AlpsBTE_Navigator.getPlugin().playerCountPLOT)
+                        .emptyLine()
+                        .version(getVersion(), isModded())
+                        .build())
                 .build();
     }
 }

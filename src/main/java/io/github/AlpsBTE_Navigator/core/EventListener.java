@@ -4,6 +4,7 @@ import github.AlpsBTE_Navigator.AlpsBTE_Navigator;
 import github.AlpsBTE_Navigator.core.navigator.NavigatorMenu;
 import github.AlpsBTE_Navigator.utils.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -12,7 +13,6 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.List;
 import java.util.UUID;
@@ -23,13 +23,21 @@ public class EventListener implements Listener {
     @EventHandler(priority = EventPriority.HIGH)
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         event.setJoinMessage(null);
-        Bukkit.broadcastMessage("§7[§6+§7] > " + event.getPlayer().getName());
 
         FileConfiguration config = AlpsBTE_Navigator.getPlugin().getConfig();
 
         if(!event.getPlayer().getInventory().contains(NavigatorMenu.getItem())) {
             event.getPlayer().getInventory().setItem(0, NavigatorMenu.getItem());
         }
+
+        event.getPlayer().teleport(new Location(
+                event.getPlayer().getWorld(),
+                589.3738407615474,
+                79.0625,
+                497.6074657396073,
+                (float) 44.393078,
+                (float) 0.09774113
+        ));
 
         if(config.getBoolean("enableJoinMessage")) {
             String message = config.getString("joinMessage");
@@ -53,12 +61,6 @@ public class EventListener implements Listener {
                 }
             }
         }
-    }
-
-    @EventHandler(priority = EventPriority.HIGH)
-    public void onPlayerLeaveEvent(PlayerQuitEvent event) {
-        event.setQuitMessage(null);
-        Bukkit.broadcastMessage("§7[§c-§7] > " + event.getPlayer().getName());
     }
 
     @EventHandler

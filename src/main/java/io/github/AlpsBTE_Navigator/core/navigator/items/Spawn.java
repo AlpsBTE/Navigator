@@ -1,6 +1,5 @@
 package github.AlpsBTE_Navigator.core.navigator.items;
 
-import github.AlpsBTE_Navigator.AlpsBTE_Navigator;
 import github.AlpsBTE_Navigator.core.navigator.NavigatorItem;
 import github.AlpsBTE_Navigator.utils.ItemBuilder;
 import github.AlpsBTE_Navigator.utils.LoreBuilder;
@@ -56,10 +55,8 @@ public class Spawn extends NavigatorItem {
         return new ItemBuilder(getMaterial(), 1)
                 .setName(getTitle())
                 .setLore(new LoreBuilder()
-                    .description(getDescription())
-                    .emptyLine()
-                    .server(serverIsOnline, AlpsBTE_Navigator.getPlugin().playerCountPLOT)
-                    .build())
+                        .description(getDescription())
+                        .build())
                 .build();
     }
 }

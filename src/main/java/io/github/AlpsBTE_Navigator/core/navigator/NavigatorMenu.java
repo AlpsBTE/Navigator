@@ -61,7 +61,7 @@ public class NavigatorMenu {
 
             if(terra.serverIsOnline) {
                 clickPlayer.sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
-                AlpsBTE_Navigator.getPlugin().connectPlayer(clickPlayer, "TERRA");
+                AlpsBTE_Navigator.getPlugin().connectPlayer(clickPlayer, "ALPS-2");
             } else {
                 clickPlayer.sendMessage(Utils.getErrorMessageFormat("Server is offline"));
             }
@@ -72,6 +72,8 @@ public class NavigatorMenu {
         //Set Event item
         Event event;
         if(!config.getBoolean("servers.event.visible") && !player.hasPermission("navigator.joinEventStaff")) {
+            event = new DefaultEvent();
+        } else if(!config.getBoolean("servers.event.visible")) {
             event = new DefaultEvent();
         } else {
             event = new Event();
@@ -85,7 +87,7 @@ public class NavigatorMenu {
             if(event.serverIsOnline) {
                 if((config.getBoolean("servers.event.joinable") && clickPlayer.hasPermission("navigator.joinEvent")) || clickPlayer.hasPermission("navigator.joinEventStaff")) {
                     clickPlayer.sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
-                    AlpsBTE_Navigator.getPlugin().connectPlayer(clickPlayer, "EVENT");
+                    AlpsBTE_Navigator.getPlugin().connectPlayer(clickPlayer, "ALPS-3");
                 } else {
                     clickPlayer.sendMessage(Utils.getErrorMessageFormat("You don't have permission to join the server."));
                 }
@@ -108,6 +110,6 @@ public class NavigatorMenu {
     }
 
     public static Menu getMenu() {
-      return ChestMenu.builder(3).title("Connect to a server").redraw(true).build();
+        return ChestMenu.builder(3).title("Connect to a server").redraw(true).build();
     }
 }
