@@ -34,7 +34,7 @@ public class PortalManager extends Thread {
                 try {
                     Vector playerLocation = Vector.toBlockPoint(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
                     if(Portal_Plot.contains(playerLocation)) {
-                        player.performCommand("spawn");
+                        player.teleport(Utils.getSpawnPoint());
                         player.performCommand("companion");
                     } else if(Portal_Terra.contains(playerLocation)) {
                         AlpsBTE_Navigator.getPlugin().connectPlayer(player, Utils.TERRA_SERVER);
