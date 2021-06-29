@@ -1,8 +1,9 @@
 main: github.AlpsBTE_Navigator.AlpsBTE_Navigator
-version: 2.0
+version: 3.0
 api-version: 1.12.2
 name: AlpsBTE-Navigator
 author: R3tuxn
+depend: [AlpsBTE-PlotSystem]
 
 commands:
   navigator:
