@@ -1,6 +1,4 @@
 # AlpsBTE-Navigator Configuration
-portals:
-  world: world
 servers:
   plot:
     IP: localhost
