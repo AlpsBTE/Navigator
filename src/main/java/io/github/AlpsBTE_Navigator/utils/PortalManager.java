@@ -15,8 +15,6 @@ import xyz.xenondevs.particle.ParticleEffect;
 import java.util.logging.Level;
 
 public class PortalManager extends Thread {
-
-    FileConfiguration config;
     World portalWorld;
 
     // Portals
@@ -26,8 +24,7 @@ public class PortalManager extends Thread {
 
     public void run() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(AlpsBTE_Navigator.getPlugin(), () -> {
-            config = AlpsBTE_Navigator.getPlugin().getConfig();
-            portalWorld = Bukkit.getWorld(config.getString("portals.world"));
+            portalWorld = Bukkit.getWorld(AlpsBTE_Navigator.getPlugin().getPlotSystemConfig().getString("lobby-world"));
 
             spawnPlotParticles(Portal_Plot.getMinimumPoint(), Portal_Plot.getMaximumPoint());
             spawnPlotParticles(Portal_Terra.getMinimumPoint(), Portal_Terra.getMaximumPoint());
@@ -42,7 +39,7 @@ public class PortalManager extends Thread {
                     } else if(Portal_Terra.contains(playerLocation)) {
                         AlpsBTE_Navigator.getPlugin().connectPlayer(player, Utils.TERRA_SERVER);
                     } else if(Portal_Event.contains(playerLocation)) {
-                        if(config.getBoolean("servers.event.joinable") || player.hasPermission("alpsbte.joinEventStaff")) {
+                        if(AlpsBTE_Navigator.getPlugin().getConfig().getBoolean("servers.event.joinable") || player.hasPermission("alpsbte.joinEventStaff")) {
                             if(player.hasPermission("alpsbte.joinEvent")) {
                                 AlpsBTE_Navigator.getPlugin().connectPlayer(player, Utils.EVENT_SERVER);
                             }

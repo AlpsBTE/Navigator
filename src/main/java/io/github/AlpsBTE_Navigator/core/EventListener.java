@@ -25,22 +25,23 @@ public class EventListener implements Listener {
         event.setJoinMessage(null);
 
         FileConfiguration config = AlpsBTE_Navigator.getPlugin().getConfig();
+        FileConfiguration plotSystemConfig = AlpsBTE_Navigator.getPlugin().getPlotSystemConfig();
 
         if(!event.getPlayer().getInventory().contains(NavigatorMenu.getItem())) {
             event.getPlayer().getInventory().setItem(0, NavigatorMenu.getItem());
         }
 
         event.getPlayer().teleport(new Location(
-                event.getPlayer().getWorld(),
-                589.3738407615474,
-                79.0625,
-                497.6074657396073,
-                (float) 44.393078,
-                (float) 0.09774113
+                Bukkit.getWorld(plotSystemConfig.getString("lobby-world")),
+                plotSystemConfig.getDouble("spawn-point.x"),
+                plotSystemConfig.getDouble("spawn-point.y"),
+                plotSystemConfig.getDouble("spawn-point.z"),
+                (float) plotSystemConfig.getDouble("spawn-point.yaw"),
+                (float) plotSystemConfig.getDouble("spawn-point.pitch")
         ));
 
-        if(config.getBoolean("enableJoinMessage")) {
-            String message = config.getString("joinMessage");
+        if(config.getBoolean("servers.plot.enableJoinMessage")) {
+            String message = config.getString("servers.plot.joinMessage");
 
             if(message.length() > 0) {
                 event.getPlayer().sendMessage(Utils.getInfoMessageFormat(message));

@@ -10,6 +10,7 @@ import github.AlpsBTE_Navigator.core.EventListener;
 import github.AlpsBTE_Navigator.core.navigator.NavigatorMenu;
 import github.AlpsBTE_Navigator.utils.PortalManager;
 import github.AlpsBTE_Navigator.utils.Utils;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -29,7 +30,9 @@ import java.util.logging.Level;
 public class AlpsBTE_Navigator extends JavaPlugin implements PluginMessageListener {
 
     private static AlpsBTE_Navigator plugin;
+
     private FileConfiguration config;
+    private FileConfiguration plotSystemConfig;
     private File configFile;
 
     public int playerCountPLOT = 0;
@@ -157,6 +160,15 @@ public class AlpsBTE_Navigator extends JavaPlugin implements PluginMessageListen
             reloadConfig();
         }
         return config;
+    }
+
+    public FileConfiguration getPlotSystemConfig() {
+        try{
+            plotSystemConfig = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("AlpsBTE-PlotSystem").getDataFolder(), "config.yml"));
+        } catch (Exception ex){
+            Bukkit.getLogger().log(Level.SEVERE, "An error occurred while reading config file!", ex);
+        }
+        return plotSystemConfig;
     }
 
     @Override
