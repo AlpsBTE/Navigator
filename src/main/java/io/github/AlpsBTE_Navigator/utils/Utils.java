@@ -1,9 +1,12 @@
 package github.AlpsBTE_Navigator.utils;
 
+import com.onarandombox.MultiverseCore.api.MultiverseWorld;
 import github.AlpsBTE_Navigator.AlpsBTE_Navigator;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
+
+import java.util.logging.Level;
 
 public class Utils {
 
@@ -31,12 +34,15 @@ public class Utils {
     public static Location getSpawnPoint() {
         FileConfiguration config = AlpsBTE_Navigator.getPlugin().getPlotSystemConfig();
 
-        return new Location(Bukkit.getWorld(config.getString("lobby-world")),
-                config.getDouble("spawn-point.x"),
-                config.getDouble("spawn-point.y"),
-                config.getDouble("spawn-point.z"),
-                (float) config.getDouble("spawn-point.yaw"),
-                (float) config.getDouble("spawn-point.pitch")
-        );
+        if (config != null && !config.getString("spawn-world").equalsIgnoreCase("default")) {
+            try {
+                MultiverseWorld spawnWorld = AlpsBTE_Navigator.getMultiverseCore().getMVWorldManager().getMVWorld(config.getString("spawn-world"));
+                return spawnWorld.getSpawnLocation();
+            } catch (Exception ignore) {
+                Bukkit.getLogger().log(Level.WARNING, "Could not find spawn-world in multiverse config!");
+            }
+        }
+
+        return AlpsBTE_Navigator.getMultiverseCore().getMVWorldManager().getSpawnWorld().getSpawnLocation();
     }
 }

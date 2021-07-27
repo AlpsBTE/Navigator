@@ -24,23 +24,23 @@ public class PortalManager extends Thread {
 
     public void run() {
         Bukkit.getScheduler().scheduleSyncRepeatingTask(AlpsBTE_Navigator.getPlugin(), () -> {
-            portalWorld = Bukkit.getWorld(AlpsBTE_Navigator.getPlugin().getPlotSystemConfig().getString("lobby-world"));
+            portalWorld = Utils.getSpawnPoint().getWorld();
 
             spawnPlotParticles(Portal_Plot.getMinimumPoint(), Portal_Plot.getMaximumPoint());
             spawnPlotParticles(Portal_Terra.getMinimumPoint(), Portal_Terra.getMaximumPoint());
             spawnPlotParticles(Portal_Event.getMinimumPoint(), Portal_Event.getMaximumPoint());
 
-            for(Player player : Bukkit.getOnlinePlayers()) {
+            for (Player player : Bukkit.getOnlinePlayers()) {
                 try {
                     Vector playerLocation = Vector.toBlockPoint(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
-                    if(Portal_Plot.contains(playerLocation)) {
+                    if (Portal_Plot.contains(playerLocation)) {
                         player.teleport(Utils.getSpawnPoint());
                         player.performCommand("companion");
-                    } else if(Portal_Terra.contains(playerLocation)) {
+                    } else if (Portal_Terra.contains(playerLocation)) {
                         AlpsBTE_Navigator.getPlugin().connectPlayer(player, Utils.TERRA_SERVER);
-                    } else if(Portal_Event.contains(playerLocation)) {
-                        if(AlpsBTE_Navigator.getPlugin().getConfig().getBoolean("servers.event.joinable") || player.hasPermission("alpsbte.joinEventStaff")) {
-                            if(player.hasPermission("alpsbte.joinEvent")) {
+                    } else if (Portal_Event.contains(playerLocation)) {
+                        if (AlpsBTE_Navigator.getPlugin().getConfig().getBoolean("servers.event.joinable") || player.hasPermission("alpsbte.joinEventStaff")) {
+                            if (player.hasPermission("alpsbte.joinEvent")) {
                                 AlpsBTE_Navigator.getPlugin().connectPlayer(player, Utils.EVENT_SERVER);
                             }
                         }

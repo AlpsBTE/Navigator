@@ -3,6 +3,7 @@ package github.AlpsBTE_Navigator;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
+import com.onarandombox.MultiverseCore.MultiverseCore;
 import github.AlpsBTE_Navigator.commands.CMD_Event;
 import github.AlpsBTE_Navigator.commands.CMD_Navigator;
 import github.AlpsBTE_Navigator.commands.CMD_Reload;
@@ -30,6 +31,7 @@ import java.util.logging.Level;
 public class AlpsBTE_Navigator extends JavaPlugin implements PluginMessageListener {
 
     private static AlpsBTE_Navigator plugin;
+    private static MultiverseCore multiverseCore;
 
     private FileConfiguration config;
     private FileConfiguration plotSystemConfig;
@@ -42,6 +44,7 @@ public class AlpsBTE_Navigator extends JavaPlugin implements PluginMessageListen
     @Override
     public void onEnable() {
         plugin = this;
+        multiverseCore = (MultiverseCore) getServer().getPluginManager().getPlugin("Multiverse-Core");
 
         reloadConfig();
 
@@ -82,6 +85,8 @@ public class AlpsBTE_Navigator extends JavaPlugin implements PluginMessageListen
     public static AlpsBTE_Navigator getPlugin() {
         return plugin;
     }
+
+    public static MultiverseCore getMultiverseCore() { return multiverseCore; }
 
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
