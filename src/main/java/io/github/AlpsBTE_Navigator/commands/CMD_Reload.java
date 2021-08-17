@@ -1,6 +1,6 @@
 package github.AlpsBTE_Navigator.commands;
 
-import github.AlpsBTE_Navigator.AlpsBTE_Navigator;
+import github.AlpsBTE_Navigator.NavigatorPlugin;
 import github.AlpsBTE_Navigator.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -12,8 +12,8 @@ public class CMD_Reload implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
         if(sender instanceof Player) {
             if(sender.hasPermission("alpsbte.nreload")) {
-                AlpsBTE_Navigator.getPlugin().reloadConfig();
-                AlpsBTE_Navigator.getPlugin().saveConfig();
+                NavigatorPlugin.getPlugin().reloadConfig();
+                NavigatorPlugin.getPlugin().saveConfig();
 
                 sender.sendMessage(Utils.getInfoMessageFormat("Successfully reloaded config."));
             }

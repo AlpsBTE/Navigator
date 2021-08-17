@@ -1,6 +1,6 @@
 package github.AlpsBTE_Navigator.commands;
 
-import github.AlpsBTE_Navigator.AlpsBTE_Navigator;
+import github.AlpsBTE_Navigator.NavigatorPlugin;
 import github.AlpsBTE_Navigator.core.navigator.items.Event;
 import github.AlpsBTE_Navigator.utils.Utils;
 import org.bukkit.command.Command;
@@ -15,14 +15,14 @@ public class CMD_Event implements CommandExecutor {
         if (sender instanceof Player) {
             if (sender.hasPermission("alpsbte.joinEvent")) {
 
-                FileConfiguration config = AlpsBTE_Navigator.getPlugin().getConfig();
+                FileConfiguration config = NavigatorPlugin.getPlugin().getConfig();
 
                 Event event = new Event();
 
-                if(AlpsBTE_Navigator.getPlugin().checkServer(event.getIP(), event.getPort())) {
+                if(NavigatorPlugin.getPlugin().checkServer(event.getIP(), event.getPort())) {
                     if(config.getBoolean("servers.event.joinable") || sender.hasPermission("alpsbte.joinEventStaff")) {
                         sender.sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
-                        AlpsBTE_Navigator.getPlugin().connectPlayer((Player)sender, "EVENT");
+                        NavigatorPlugin.getPlugin().connectPlayer((Player)sender, "EVENT");
                     } else {
                         sender.sendMessage(Utils.getErrorMessageFormat("You don't have permission to join the server."));
                     }

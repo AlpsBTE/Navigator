@@ -1,6 +1,6 @@
 package github.AlpsBTE_Navigator.core.navigator;
 
-import github.AlpsBTE_Navigator.AlpsBTE_Navigator;
+import github.AlpsBTE_Navigator.NavigatorPlugin;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
@@ -9,12 +9,12 @@ import java.util.List;
 public abstract class NavigatorItem {
 
     public NavigatorItem() {
-        if(AlpsBTE_Navigator.getPlugin().checkServer(getIP(), getPort())) serverIsOnline = true;
+        if(NavigatorPlugin.getPlugin().checkServer(getIP(), getPort())) serverIsOnline = true;
     }
 
     protected boolean serverIsOnline;
 
-    protected FileConfiguration config = AlpsBTE_Navigator.getPlugin().getConfig();
+    protected FileConfiguration config = NavigatorPlugin.getPlugin().getConfig();
 
     public abstract Material getMaterial();
 

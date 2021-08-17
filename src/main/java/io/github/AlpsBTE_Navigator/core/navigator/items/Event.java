@@ -1,6 +1,6 @@
 package github.AlpsBTE_Navigator.core.navigator.items;
 
-import github.AlpsBTE_Navigator.AlpsBTE_Navigator;
+import github.AlpsBTE_Navigator.NavigatorPlugin;
 import github.AlpsBTE_Navigator.core.navigator.NavigatorItem;
 import github.AlpsBTE_Navigator.utils.ItemBuilder;
 import github.AlpsBTE_Navigator.utils.LoreBuilder;
@@ -69,7 +69,7 @@ public class Event extends NavigatorItem {
                         .emptyLine()
                         .features(getFeatures())
                         .emptyLine()
-                        .server(serverIsOnline, AlpsBTE_Navigator.getPlugin().playerCountEVENT)
+                        .server(serverIsOnline, NavigatorPlugin.getPlugin().playerCountEVENT)
                         .emptyLine()
                         .version(getVersion(), isModded())
                         .build())

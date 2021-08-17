@@ -1,6 +1,6 @@
 package github.AlpsBTE_Navigator.core.navigator;
 
-import github.AlpsBTE_Navigator.AlpsBTE_Navigator;
+import github.AlpsBTE_Navigator.NavigatorPlugin;
 import github.AlpsBTE_Navigator.core.navigator.items.*;
 import github.AlpsBTE_Navigator.utils.ItemBuilder;
 import github.AlpsBTE_Navigator.utils.Utils;
@@ -18,7 +18,7 @@ import org.ipvp.canvas.type.ChestMenu;
 public class NavigatorMenu {
     public Menu getUI(Player player) {
         Menu navigatorMenu = getMenu();
-        FileConfiguration config = AlpsBTE_Navigator.getPlugin().getConfig();
+        FileConfiguration config = NavigatorPlugin.getPlugin().getConfig();
 
         // Set glass border
         Mask mask = BinaryMask.builder(navigatorMenu)
@@ -61,7 +61,7 @@ public class NavigatorMenu {
 
             if(terra.serverIsOnline) {
                 clickPlayer.sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
-                AlpsBTE_Navigator.getPlugin().connectPlayer(clickPlayer, "ALPS-2");
+                NavigatorPlugin.getPlugin().connectPlayer(clickPlayer, "ALPS-2");
             } else {
                 clickPlayer.sendMessage(Utils.getErrorMessageFormat("Server is offline"));
             }
@@ -87,7 +87,7 @@ public class NavigatorMenu {
             if(event.serverIsOnline) {
                 if((config.getBoolean("servers.event.joinable") && clickPlayer.hasPermission("navigator.joinEvent")) || clickPlayer.hasPermission("navigator.joinEventStaff")) {
                     clickPlayer.sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
-                    AlpsBTE_Navigator.getPlugin().connectPlayer(clickPlayer, "ALPS-3");
+                    NavigatorPlugin.getPlugin().connectPlayer(clickPlayer, "ALPS-3");
                 } else {
                     clickPlayer.sendMessage(Utils.getErrorMessageFormat("You don't have permission to join the server."));
                 }

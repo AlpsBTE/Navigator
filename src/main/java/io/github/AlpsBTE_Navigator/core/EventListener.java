@@ -1,6 +1,6 @@
 package github.AlpsBTE_Navigator.core;
 
-import github.AlpsBTE_Navigator.AlpsBTE_Navigator;
+import github.AlpsBTE_Navigator.NavigatorPlugin;
 import github.AlpsBTE_Navigator.core.navigator.NavigatorMenu;
 import github.AlpsBTE_Navigator.utils.Utils;
 import org.bukkit.Bukkit;

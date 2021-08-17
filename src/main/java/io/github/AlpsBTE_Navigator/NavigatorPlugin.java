@@ -28,9 +28,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.util.logging.Level;
 
-public class AlpsBTE_Navigator extends JavaPlugin implements PluginMessageListener {
+public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener {
 
-    private static AlpsBTE_Navigator plugin;
+    private static NavigatorPlugin plugin;
     private static MultiverseCore multiverseCore;
 
     private FileConfiguration config;
@@ -82,7 +82,7 @@ public class AlpsBTE_Navigator extends JavaPlugin implements PluginMessageListen
         }).start();
     }
 
-    public static AlpsBTE_Navigator getPlugin() {
+    public static NavigatorPlugin getPlugin() {
         return plugin;
     }
 
@@ -136,8 +136,7 @@ public class AlpsBTE_Navigator extends JavaPlugin implements PluginMessageListen
         try {
             s.connect(new InetSocketAddress(IP, port), 30); //good timeout is 10-20
             return true;
-        } catch (IOException ex) {
-        }
+        } catch (IOException ignored) {}
         return false;
     }
 
