@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.github.AlpsBTE-Navigator</groupId>
+    <groupId>com.alpsbte.navigator</groupId>
     <artifactId>AlpsBTE-Navigator</artifactId>
-    <version>2.0</version>
+    <version>3.0</version>
 
     <repositories>
         <!-- Spigot & Bukkit API -->
@@ -23,13 +23,19 @@
 
         <!-- Multiverse Core -->
         <repository>
-            <id>Multiverse-Core</id>
-            <url>http://repo.onarandombox.com/content/repositories/multiverse/</url>
+            <id>OnARandomBox</id>
+            <url>https://repo.onarandombox.com/content/groups/public/</url>
+        </repository>
+
+        <!-- Holographic Displays -->
+        <repository>
+            <id>codemc-repo</id>
+            <url>https://repo.codemc.io/repository/maven-public/</url>
         </repository>
     </repositories>
 
     <dependencies>
-        <!-- Spigot API -->
+        <!-- Spigot -->
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
@@ -37,11 +43,19 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Bukkit API -->
+        <!-- Bukkit -->
         <dependency>
             <groupId>org.bukkit</groupId>
             <artifactId>bukkit</artifactId>
             <version>1.12.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- World Edit -->
+        <dependency>
+            <groupId>com.sk89q.worldedit</groupId>
+            <artifactId>worldedit-bukkit</artifactId>
+            <version>6.1.9</version>
             <scope>provided</scope>
         </dependency>
 
@@ -53,32 +67,28 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- World Edit -->
-        <dependency>
-            <groupId>com.sk89q.worldedit</groupId>
-            <artifactId>worldedit-bukkit</artifactId>
-            <version>6.1.9</version>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- Multiverse Core -->
         <dependency>
             <groupId>com.onarandombox.multiversecore</groupId>
             <artifactId>Multiverse-Core</artifactId>
-            <version>2.5.0</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.bukkit</groupId>
-                    <artifactId>craftbukkit</artifactId>
-                </exclusion>
-            </exclusions>
+            <version>4.3.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Holographic Displays -->
+        <dependency>
+            <groupId>com.gmail.filoghost.holographicdisplays</groupId>
+            <artifactId>holographicdisplays-api</artifactId>
+            <version>2.4.0</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- ParticleLib -->
         <dependency>
             <groupId>xyz.xenondevs</groupId>
             <artifactId>particle</artifactId>
-            <version>1.6.3</version>
+            <version>1.6.4</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -96,11 +106,12 @@
         <!-- IMPORTANT: Plugin Building Path -->
         <sourceDirectory>src/main/java/io</sourceDirectory>
         <!-- IMPORTANT: Output File Name -->
-        <finalName>AlpsBTE-Navigator V3.0</finalName>
+        <finalName>${project.artifactId} V${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
                 <configuration>
                     <source>8</source>
                     <target>8</target>
@@ -109,7 +120,23 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.1.0</version>
+                <version>3.2.4</version>
+                <configuration>
+                    <createDependencyReducedPom>true</createDependencyReducedPom>
+                    <filters>
+                        <filter>
+                            <artifact>*:*</artifact>
+                            <excludes>
+                                <exclude>module-info.class</exclude>
+                                <exclude>META-INF/*.SF</exclude>
+                                <exclude>META-INF/*.MF</exclude>
+                                <exclude>META-INF/*.DSA</exclude>
+                                <exclude>META-INF/*.RSA</exclude>
+                                <exclude>META-INF/**</exclude>
+                            </excludes>
+                        </filter>
+                    </filters>
+                </configuration>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -123,8 +150,7 @@
     </build>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
-
 </project>
