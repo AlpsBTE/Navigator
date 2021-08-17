@@ -4,10 +4,8 @@ import github.AlpsBTE_Navigator.AlpsBTE_Navigator;
 import github.AlpsBTE_Navigator.core.navigator.NavigatorMenu;
 import github.AlpsBTE_Navigator.utils.Utils;
 import org.bukkit.Bukkit;
-import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -20,47 +18,46 @@ import java.util.logging.Level;
 
 public class EventListener implements Listener {
 
-    @EventHandler(priority = EventPriority.HIGH)
+    @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
-        event.setJoinMessage(null);
-
-        FileConfiguration config = AlpsBTE_Navigator.getPlugin().getConfig();
-
-        if(!event.getPlayer().getInventory().contains(NavigatorMenu.getItem())) {
-            event.getPlayer().getInventory().setItem(0, NavigatorMenu.getItem());
-        }
-
         event.getPlayer().teleport(Utils.getSpawnPoint());
 
-        if(config.getBoolean("servers.plot.enableJoinMessage")) {
-            String message = config.getString("servers.plot.joinMessage");
+        Bukkit.getScheduler().runTaskAsynchronously(NavigatorPlugin.getPlugin(), () -> {
+            FileConfiguration config = NavigatorPlugin.getPlugin().getConfig();
 
-            if(message.length() > 0) {
-                event.getPlayer().sendMessage(Utils.getInfoMessageFormat(message));
+            if(!event.getPlayer().getInventory().contains(NavigatorMenu.getItem())) {
+                event.getPlayer().getInventory().setItem(0, NavigatorMenu.getItem());
             }
-        }
 
-        List<String> builders = config.getStringList("builders");
+            if(config.getBoolean("servers.plot.enableJoinMessage")) {
+                String message = config.getString("servers.plot.joinMessage");
 
-        for(String builder : builders) {
-            if(event.getPlayer().getUniqueId().equals(UUID.fromString(builder))) {
-                try {
-                    Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "lp user " + event.getPlayer().getName() + " group add builder");
-                    config.getStringList("builders").set(config.getStringList("builders").indexOf(builder), null);
-                    AlpsBTE_Navigator.getPlugin().saveConfig();
-                    return;
-                } catch (Exception ex) {
-                    AlpsBTE_Navigator.getPlugin().getLogger().log(Level.SEVERE, "Could not add builder permission to player: " + builder, ex);
+                if(message.length() > 0) {
+                    event.getPlayer().sendMessage(Utils.getInfoMessageFormat(message));
                 }
             }
-        }
+
+            List<String> builders = config.getStringList("builders");
+            for(String builder : builders) {
+                if(event.getPlayer().getUniqueId().equals(UUID.fromString(builder))) {
+                    try {
+                        Bukkit.getServer().dispatchCommand(Bukkit.getConsoleSender(), "lp user " + event.getPlayer().getName() + " group add builder");
+                        config.getStringList("builders").set(config.getStringList("builders").indexOf(builder), null);
+                        NavigatorPlugin.getPlugin().saveConfig();
+                        return;
+                    } catch (Exception ex) {
+                        NavigatorPlugin.getPlugin().getLogger().log(Level.SEVERE, "Could not add builder permission to player: " + builder, ex);
+                    }
+                }
+            }
+        });
     }
 
     @EventHandler
     public void onPlayerClickEvent(PlayerInteractEvent event) {
         if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
             if(event.getItem() != null && event.getItem().equals(NavigatorMenu.getItem())) {
-                AlpsBTE_Navigator.getPlugin().UpdatePlayerCount(event.getPlayer());
+                NavigatorPlugin.getPlugin().UpdatePlayerCount(event.getPlayer());
             }
         }
     }
@@ -71,5 +68,4 @@ public class EventListener implements Listener {
             event.setCancelled(true);
         }
     }
-
 }
