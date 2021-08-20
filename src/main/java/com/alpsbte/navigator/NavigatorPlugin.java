@@ -33,7 +33,8 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     private static NavigatorPlugin plugin;
     private static MultiverseCore multiverseCore;
 
-    private FileConfiguration config;
+    // Config
+    private ConfigManager configManager;
     private FileConfiguration plotSystemConfig;
     private File configFile;
 
@@ -45,6 +46,12 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     public void onEnable() {
         plugin = this;
         multiverseCore = (MultiverseCore) getServer().getPluginManager().getPlugin("Multiverse-Core");
+
+        try {
+            configManager = new ConfigManager();
+        } catch (ConfigNotImplementedException ex) {
+            return;
+        }
 
         reloadConfig();
 
@@ -168,7 +175,7 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
 
     public FileConfiguration getPlotSystemConfig() {
         try{
-            plotSystemConfig = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("AlpsBTE-PlotSystem").getDataFolder(), "config.yml"));
+            plotSystemConfig = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("Plot-System").getDataFolder(), "config.yml"));
         } catch (Exception ex){
             Bukkit.getLogger().log(Level.SEVERE, "An error occurred while reading config file!", ex);
         }
