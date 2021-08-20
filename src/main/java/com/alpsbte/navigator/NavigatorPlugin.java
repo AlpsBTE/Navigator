@@ -1,16 +1,24 @@
-package github.AlpsBTE_Navigator;
+package com.alpsbte.navigator;
 
+import com.alpsbte.navigator.commands.CMD_Navigator;
+import com.alpsbte.navigator.commands.CMD_Reload;
+import com.alpsbte.navigator.commands.CMD_SetHologram;
+import com.alpsbte.navigator.core.config.ConfigManager;
+import com.alpsbte.navigator.core.config.ConfigNotImplementedException;
+import com.alpsbte.navigator.core.config.ConfigPaths;
+import com.alpsbte.navigator.core.holograms.AccuracyJnRLeaderboard;
+import com.alpsbte.navigator.core.holograms.EventInfoHologram;
+import com.alpsbte.navigator.core.holograms.HolographicDisplay;
+import com.alpsbte.navigator.core.holograms.SpeedJnRLeaderboard;
+import com.alpsbte.navigator.core.navigator.NavigatorMenu;
+import com.alpsbte.navigator.utils.PortalManager;
+import com.alpsbte.navigator.utils.Utils;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.onarandombox.MultiverseCore.MultiverseCore;
-import github.AlpsBTE_Navigator.commands.CMD_Event;
-import github.AlpsBTE_Navigator.commands.CMD_Navigator;
-import github.AlpsBTE_Navigator.commands.CMD_Reload;
-import github.AlpsBTE_Navigator.core.EventListener;
-import github.AlpsBTE_Navigator.core.navigator.NavigatorMenu;
-import github.AlpsBTE_Navigator.utils.PortalManager;
-import github.AlpsBTE_Navigator.utils.Utils;
+import com.alpsbte.navigator.commands.CMD_Event;
+import com.alpsbte.navigator.core.EventListener;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -22,10 +30,10 @@ import org.ipvp.canvas.MenuFunctionListener;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 
 public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener {
@@ -99,12 +107,6 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         }).start();
     }
 
-    public static NavigatorPlugin getPlugin() {
-        return plugin;
-    }
-
-    public static MultiverseCore getMultiverseCore() { return multiverseCore; }
-
     @Override
     public void onPluginMessageReceived(String channel, Player player, byte[] message) {
         if (channel.equals("BungeeCord")) {
@@ -174,20 +176,7 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
 
     @Override
     public void reloadConfig() {
-        configFile = new File(getDataFolder(), "config.yml");
-        if (configFile.exists()) {
-            config = YamlConfiguration.loadConfiguration(configFile);
-        } else {
-            // Look for default configuration file
-            try {
-                Reader defConfigStream = new InputStreamReader(this.getResource("defaultConfig.yml"), "UTF8");
-
-                config = YamlConfiguration.loadConfiguration(defConfigStream);
-            } catch (IOException ex) {
-                getLogger().log(Level.SEVERE, "Could not load default configuration file", ex);
-            }
-        }
-        saveConfig();
+        this.configManager.reloadConfig();
     }
 
     @Override
@@ -213,18 +202,11 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         return plotSystemConfig;
     }
 
-    @Override
-    public void saveConfig() {
-        if (config == null || configFile == null) {
-            return;
-        }
-
-        try {
-            getConfig().save(configFile);
-        } catch (IOException ex) {
-            getLogger().log(Level.SEVERE, "Could not save config to " + configFile, ex);
-        }
+    public static NavigatorPlugin getPlugin() {
+        return plugin;
     }
+
+    public static MultiverseCore getMultiverseCore() { return multiverseCore; }
 
     public static List<HolographicDisplay> getHolograms() { return holograms; }
 }

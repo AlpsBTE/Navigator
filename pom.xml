@@ -112,9 +112,9 @@
             </resource>
         </resources>
         <!-- IMPORTANT: Plugin Building Path -->
-        <sourceDirectory>src/main/java/io</sourceDirectory>
+        <sourceDirectory>src/main/java</sourceDirectory>
         <!-- IMPORTANT: Output File Name -->
-        <finalName>${project.artifactId} V${project.version}</finalName>
+        <finalName>${project.artifactId}-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

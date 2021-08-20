@@ -1,8 +1,9 @@
-package github.AlpsBTE_Navigator.core;
+package com.alpsbte.navigator.core;
 
-import github.AlpsBTE_Navigator.NavigatorPlugin;
-import github.AlpsBTE_Navigator.core.navigator.NavigatorMenu;
-import github.AlpsBTE_Navigator.utils.Utils;
+import com.alpsbte.navigator.NavigatorPlugin;
+import com.alpsbte.navigator.core.config.ConfigPaths;
+import com.alpsbte.navigator.core.navigator.NavigatorMenu;
+import com.alpsbte.navigator.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
@@ -20,7 +21,7 @@ public class EventListener implements Listener {
 
     @EventHandler
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
-        event.getPlayer().teleport(Utils.getSpawnPoint());
+        event.getPlayer().teleport(Utils.getSpawnLocation());
 
         Bukkit.getScheduler().runTaskAsynchronously(NavigatorPlugin.getPlugin(), () -> {
             FileConfiguration config = NavigatorPlugin.getPlugin().getConfig();
@@ -29,8 +30,8 @@ public class EventListener implements Listener {
                 event.getPlayer().getInventory().setItem(0, NavigatorMenu.getItem());
             }
 
-            if(config.getBoolean("servers.plot.enableJoinMessage")) {
-                String message = config.getString("servers.plot.joinMessage");
+            if(config.getBoolean(ConfigPaths.SERVERS_PLOT_ENABLE_JOIN_MESSAGE)) {
+                String message = config.getString(ConfigPaths.SERVERS_PLOT_JOIN_MESSAGE);
 
                 if(message.length() > 0) {
                     event.getPlayer().sendMessage(Utils.getInfoMessageFormat(message));

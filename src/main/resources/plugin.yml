@@ -1,4 +1,4 @@
-main: github.AlpsBTE_Navigator.AlpsBTE_Navigator
+main: com.alpsbte.navigator.NavigatorPlugin
 version: 3.0
 api-version: 1.12.2
 name: AlpsBTE-Navigator
