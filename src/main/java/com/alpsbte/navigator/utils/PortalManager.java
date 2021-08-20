@@ -1,9 +1,10 @@
-package github.AlpsBTE_Navigator.utils;
+package com.alpsbte.navigator.utils;
 
+import com.alpsbte.navigator.core.config.ConfigPaths;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
-import github.AlpsBTE_Navigator.NavigatorPlugin;
+import com.alpsbte.navigator.NavigatorPlugin;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -25,7 +26,7 @@ public class PortalManager extends Thread {
     public Region Portal_Event = new CuboidRegion(Vector.toBlockPoint(540, 79, 544), Vector.toBlockPoint(542, 79, 546));
 
     public void run() {
-        portalWorld = Utils.getSpawnPoint().getWorld();
+        portalWorld = Utils.getSpawnLocation().getWorld();
 
         spawnPortalParticles(Portal_Plot.getMinimumPoint(), Portal_Plot.getMaximumPoint());
         spawnPortalParticles(Portal_Terra.getMinimumPoint(), Portal_Terra.getMaximumPoint());
@@ -36,12 +37,12 @@ public class PortalManager extends Thread {
                 try {
                     Vector playerLocation = Vector.toBlockPoint(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
                     if (Portal_Plot.contains(playerLocation)) {
-                        player.teleport(Utils.getSpawnPoint());
+                        player.teleport(Utils.getSpawnLocation());
                         player.performCommand("companion");
                     } else if (Portal_Terra.contains(playerLocation)) {
                         NavigatorPlugin.getPlugin().connectPlayer(player, Utils.TERRA_SERVER);
                     } else if (Portal_Event.contains(playerLocation)) {
-                        if (NavigatorPlugin.getPlugin().getConfig().getBoolean("servers.event.joinable") || player.hasPermission("alpsbte.joinEventStaff")) {
+                        if (NavigatorPlugin.getPlugin().getConfig().getBoolean(ConfigPaths.SERVERS_EVENT_JOINABLE) || player.hasPermission("alpsbte.joinEventStaff")) {
                             if (player.hasPermission("alpsbte.joinEvent")) {
                                 NavigatorPlugin.getPlugin().connectPlayer(player, Utils.EVENT_SERVER);
                             }
@@ -56,7 +57,7 @@ public class PortalManager extends Thread {
 
     public void spawnPortalParticles(Vector min, Vector max) {
         List<Object> packets = new ArrayList<>();
-        ParticleBuilder particle = new ParticleBuilder(ParticleEffect.CLOUD).setOffsetX(0.5f).setOffsetZ(0.5f).setSpeed(0.05f);
+        ParticleBuilder particle = new ParticleBuilder(ParticleEffect.CLOUD).setSpeed(0.05f);
         for (int i = min.getBlockX(); i <= max.getBlockX(); i++) {
             for (int j = min.getBlockY(); j <= max.getBlockY(); j++) {
                 for (int k = min.getBlockZ(); k <= max.getBlockZ(); k++) {
@@ -64,6 +65,6 @@ public class PortalManager extends Thread {
                 }
             }
         }
-        TaskManager.startGlobalTask(packets, 2);
+        TaskManager.startGlobalTask(packets, 4);
     }
 }
