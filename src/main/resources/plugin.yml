@@ -3,7 +3,7 @@ version: 3.0
 api-version: 1.12.2
 name: AlpsBTE-Navigator
 author: R3tuxn
-depend: [Multiverse-Core, Plot-System]
+depend: [Multiverse-Core, Plot-System, LeakParkour]
 
 commands:
   navigator:
@@ -18,6 +18,10 @@ commands:
     description: reload AlpsBTE-Navigator config file
     usage: /nreload
     permission: alpsbte.nreload
+  sethologram:
+    description: Sets the position of a hologram
+    usage: /sethologram <name>
+    permission: alpsbte.admin
 
 permissions:
   alpsbte.joinEventStaff:

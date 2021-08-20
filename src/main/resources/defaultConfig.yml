@@ -1,4 +1,11 @@
-# AlpsBTE-Navigator Configuration
+# -----------------------------------------------------
+# |          Navigator Plugin - by Alps BTE
+# -----------------------------------------------------
+# | [Github Repo] https://github.com/AlpsBTE/AlpsBTE-Navigator
+# | [Contacts - Discord] R3tuxn#7169
+# -----------------------------------------------------
+
+# Servers
 servers:
   plot:
     IP: localhost
@@ -20,3 +27,30 @@ servers:
       description: test/test/test
       startDate: 20.02.2021 02:25 AM
       endDate: 20.02.2021 02:25 AM
+
+# -----------------------------------------------------
+# | Holograms: Show statistics and info / Are placed in the spawn world
+# | NOTE: Requires the HolographicDisplays plugin to work
+# -----------------------------------------------------
+holograms:
+  # Displays the top 10 players
+  speed-JnR-leaderboard:
+    enabled: false
+    x: 0
+    y: 0
+    z: 0
+  # Displays the top 10 players
+  accuracy-JnR-leaderboard:
+    enabled: false
+    x: 0
+    y: 0
+    z: 0
+  # Displays event information
+  event-info:
+    enabled: false
+    x: 0
+    y: 0
+    z: 0
+
+# NOTE: Do not change
+config-version: 1.0

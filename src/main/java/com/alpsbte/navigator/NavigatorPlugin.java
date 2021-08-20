@@ -36,7 +36,14 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     // Config
     private ConfigManager configManager;
     private FileConfiguration plotSystemConfig;
-    private File configFile;
+    private FileConfiguration leaderboardConfig;
+
+    // Holograms
+    private static final List<HolographicDisplay> holograms = Arrays.asList(
+            new SpeedJnRLeaderboard(),
+            new AccuracyJnRLeaderboard(),
+            new EventInfoHologram()
+    );
 
     public int playerCountPLOT = 0;
     public int playerCountTERRA = 0;
@@ -63,10 +70,13 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         this.getCommand("event").setExecutor(new CMD_Event());
         this.getCommand("navigator").setExecutor(new CMD_Navigator());
         this.getCommand("nreload").setExecutor(new CMD_Reload());
+        this.getCommand("sethologram").setExecutor(new CMD_SetHologram());
 
 
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
+
+        reloadHolograms();
 
         new PortalManager().start();
 
@@ -147,6 +157,21 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         return false;
     }
 
+    public static void reloadHolograms() {
+        for (HolographicDisplay hologram : holograms) {
+            if(getPlugin().getConfig().getBoolean(hologram.getDefaultPath() + ConfigPaths.HOLOGRAMS_ENABLED)) {
+                hologram.show();
+            } else {
+                hologram.hide();
+            }
+        }
+    }
+
+    @Override
+    public FileConfiguration getConfig() {
+        return this.configManager.getConfig();
+    }
+
     @Override
     public void reloadConfig() {
         configFile = new File(getDataFolder(), "config.yml");
@@ -166,11 +191,17 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     }
 
     @Override
-    public FileConfiguration getConfig() {
-        if (config == null) {
-            reloadConfig();
+    public void saveConfig() {
+        this.configManager.saveConfig();
+    }
+
+    public FileConfiguration getLeaderboardConfig() {
+        try{
+            leaderboardConfig = YamlConfiguration.loadConfiguration(new File(Bukkit.getPluginManager().getPlugin("LeakParkour").getDataFolder(), "history.yml"));
+        } catch (Exception ex){
+            Bukkit.getLogger().log(Level.SEVERE, "An error occurred while reading config file!", ex);
         }
-        return config;
+        return leaderboardConfig;
     }
 
     public FileConfiguration getPlotSystemConfig() {
@@ -195,4 +226,5 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         }
     }
 
+    public static List<HolographicDisplay> getHolograms() { return holograms; }
 }
