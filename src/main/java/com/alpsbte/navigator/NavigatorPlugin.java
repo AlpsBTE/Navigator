@@ -1,8 +1,6 @@
 package com.alpsbte.navigator;
 
-import com.alpsbte.navigator.commands.CMD_Navigator;
-import com.alpsbte.navigator.commands.CMD_Reload;
-import com.alpsbte.navigator.commands.CMD_SetHologram;
+import com.alpsbte.navigator.commands.*;
 import com.alpsbte.navigator.core.config.ConfigManager;
 import com.alpsbte.navigator.core.config.ConfigNotImplementedException;
 import com.alpsbte.navigator.core.config.ConfigPaths;
@@ -17,7 +15,6 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.onarandombox.MultiverseCore.MultiverseCore;
-import com.alpsbte.navigator.commands.CMD_Event;
 import com.alpsbte.navigator.core.EventListener;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -77,6 +74,8 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         // Add Commands
         this.getCommand("event").setExecutor(new CMD_Event());
         this.getCommand("navigator").setExecutor(new CMD_Navigator());
+        this.getCommand("tpp").setExecutor(new CMD_Tpp());
+        this.getCommand("hub").setExecutor(new CMD_Hub());
         this.getCommand("nreload").setExecutor(new CMD_Reload());
         this.getCommand("sethologram").setExecutor(new CMD_SetHologram());
 

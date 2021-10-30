@@ -14,6 +14,14 @@ commands:
     description: connect to the event server
     usage: /event
     permission: alpsbte.joinEvent
+  tpp:
+    description: teleport to another player
+    usage: /tpp <player>
+    permission: alpsbte.tpp
+  hub:
+    description: teleport to the hub world
+    usage: /hub
+    permission: alpsbte.hub
   nreload:
     description: reload AlpsBTE-Navigator config file
     usage: /nreload
