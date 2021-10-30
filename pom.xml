@@ -32,6 +32,12 @@
             <id>codemc-repo</id>
             <url>https://repo.codemc.io/repository/maven-public/</url>
         </repository>
+
+        <!-- JitPack -->
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -59,12 +65,12 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Inventory Menu Builder -->
+        <!-- Canvas Menu Builder -->
         <dependency>
-            <groupId>org.ipvp</groupId>
+            <groupId>com.github.IPVP-MC</groupId>
             <artifactId>canvas</artifactId>
-            <version>1.6.0-SNAPSHOT</version>
-            <scope>compile</scope>
+            <version>master-2047a9372b-1</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Multiverse Core -->
