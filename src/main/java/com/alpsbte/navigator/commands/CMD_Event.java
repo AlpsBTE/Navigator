@@ -23,7 +23,7 @@ public class CMD_Event implements CommandExecutor {
                 if(NavigatorPlugin.getPlugin().checkServer(event.getIP(), event.getPort())) {
                     if(config.getBoolean(ConfigPaths.SERVERS_EVENT_JOINABLE) || sender.hasPermission("alpsbte.joinEventStaff")) {
                         sender.sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
-                        NavigatorPlugin.getPlugin().connectPlayer((Player)sender, "EVENT");
+                        NavigatorPlugin.getPlugin().connectPlayer((Player)sender, "ALPS-3");
                     } else {
                         sender.sendMessage(Utils.getErrorMessageFormat("You don't have permission to join the server."));
                     }
@@ -31,6 +31,8 @@ public class CMD_Event implements CommandExecutor {
                     sender.sendMessage(Utils.getErrorMessageFormat("Server is offline"));
                 }
 
+            } else {
+                sender.sendMessage(Utils.getErrorMessageFormat("You don't have permission to join the server."));
             }
         }
         return true;

@@ -72,7 +72,7 @@ public class NavigatorMenu {
 
         //Set Event item
         Event event;
-        if(!config.getBoolean(ConfigPaths.SERVERS_EVENT_VISIBLE) && !player.hasPermission("navigator.joinEventStaff")) {
+        if(!config.getBoolean(ConfigPaths.SERVERS_EVENT_VISIBLE) && !player.hasPermission("alpsbte.joinEventStaff")) {
             event = new DefaultEvent();
         } else if(!config.getBoolean(ConfigPaths.SERVERS_EVENT_VISIBLE)) {
             event = new DefaultEvent();
@@ -84,17 +84,7 @@ public class NavigatorMenu {
 
         navigatorMenu.getSlot(22).setClickHandler((clickPlayer, clickInformation) -> {
             clickPlayer.closeInventory();
-
-            if(event.serverIsOnline) {
-                if((config.getBoolean(ConfigPaths.SERVERS_EVENT_JOINABLE) && clickPlayer.hasPermission("navigator.joinEvent")) || clickPlayer.hasPermission("navigator.joinEventStaff")) {
-                    clickPlayer.sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
-                    NavigatorPlugin.getPlugin().connectPlayer(clickPlayer, "ALPS-3");
-                } else {
-                    clickPlayer.sendMessage(Utils.getErrorMessageFormat("You don't have permission to join the server."));
-                }
-            } else {
-                clickPlayer.sendMessage(Utils.getErrorMessageFormat("Server is offline"));
-            }
+            clickPlayer.performCommand("event");
         });
 
 
