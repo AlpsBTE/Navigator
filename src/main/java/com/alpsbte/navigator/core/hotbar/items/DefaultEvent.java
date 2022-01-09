@@ -14,7 +14,7 @@ public class DefaultEvent extends Event {
 
     @Override
     public String getTitle() {
-        return "§b§lEVENT SERVER";
+        return "§b§lEVENT SERVER §7(Right Click)";
     }
 
     @Override

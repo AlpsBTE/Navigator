@@ -1,52 +1,52 @@
 package com.alpsbte.navigator.core.navigator.items;
 
-import com.alpsbte.navigator.NavigatorPlugin;
 import com.alpsbte.navigator.core.config.ConfigPaths;
 import com.alpsbte.navigator.utils.ItemBuilder;
 import com.alpsbte.navigator.utils.LoreBuilder;
+import com.alpsbte.navigator.NavigatorPlugin;
 import com.alpsbte.navigator.core.navigator.NavigatorItem;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
+import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Plot extends NavigatorItem {
+public class Event extends NavigatorItem {
 
     @Override
     public Material getMaterial() {
-        return Material.WORKBENCH;
+        return Material.valueOf(config.getString(ConfigPaths.SERVERS_EVENT_TYPE_MATERIAL));
     }
 
     @Override
     public String getTitle() {
-        return "§b§lPLOT SYSTEM";
+        return config.getString(ConfigPaths.SERVERS_EVENT_TYPE_TITLE) + " §7(Right Click)";
     }
 
     @Override
     public List<String> getDescription() {
-        return Arrays.asList(
-                "Choose a city, get a outline and start building on your plot.",
-                "When you are done, we will review it and add it to the Terra 1:1 world."
-        );
+        return Arrays.asList(config.getString(ConfigPaths.SERVERS_EVENT_TYPE_DESCRIPTION).split("/"));
     }
 
     @Override
     public List<String> getFeatures() {
-        return Arrays.asList(
-                "Vanilla (No Mods)",
-                "Easy To Use",
-                "Different difficulty levels"
-        );
+        return new ArrayList<>(Arrays.asList(
+                "§bStart: §f " + config.getString(ConfigPaths.SERVERS_EVENT_TYPE_START_DATE),
+                "§bEnd: §f " + config.getString(ConfigPaths.SERVERS_EVENT_TYPE_END_DATE)
+        ));
     }
 
     @Override
     public String getIP() {
-        return config.getString(ConfigPaths.SERVERS_PLOT_IP);
+        return config.getString(ConfigPaths.SERVERS_EVENT_IP);
     }
 
     @Override
     public int getPort() {
-        return config.getInt(ConfigPaths.SERVERS_PLOT_PORT);
+        return config.getInt(ConfigPaths.SERVERS_EVENT_PORT);
     }
 
     @Override
@@ -68,10 +68,16 @@ public class Plot extends NavigatorItem {
                         .emptyLine()
                         .features(getFeatures())
                         .emptyLine()
-                        .server(serverIsOnline, NavigatorPlugin.getPlugin().playerCountPLOT)
+                        .server(serverIsOnline, NavigatorPlugin.getPlugin().playerCountEVENT)
                         .emptyLine()
                         .version(getVersion(), isModded())
                         .build())
+                .setEnchantment(Enchantment.ARROW_DAMAGE)
+                .setItemFlag(ItemFlag.HIDE_ENCHANTS)
                 .build();
+    }
+
+    public static ItemStack getItem() {
+        return new Event().createItem();
     }
 }
