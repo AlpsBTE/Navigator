@@ -23,6 +23,11 @@ public class ItemBuilder {
         itemMeta = item.getItemMeta();
     }
 
+    public ItemBuilder(ItemStack itemStack) {
+        item = itemStack;
+        itemMeta = item.getItemMeta();
+    }
+
     public ItemBuilder setName(String name) {
         itemMeta.setDisplayName(name);
         return this;

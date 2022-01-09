@@ -5,7 +5,13 @@ import com.alpsbte.navigator.core.config.ConfigPaths;
 import com.alpsbte.navigator.core.hotbar.NavigatorMenu;
 import com.alpsbte.navigator.core.hotbar.items.simplified.PlotSimplified;
 import com.alpsbte.navigator.core.hotbar.items.simplified.TerraSimplified;
+import com.alpsbte.navigator.utils.Items;
 import com.alpsbte.navigator.utils.Utils;
+import me.arcaniax.hdb.api.DatabaseLoadEvent;
+import me.arcaniax.hdb.api.HeadDatabaseAPI;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.ClickEvent;
+import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
@@ -16,6 +22,8 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.logging.Level;
 
 public class EventListener implements Listener {
 
@@ -36,6 +44,10 @@ public class EventListener implements Listener {
 
                 if (!event.getPlayer().getInventory().contains(plotSimplifiedItem)) {
                     event.getPlayer().getInventory().setItem(1, plotSimplifiedItem);
+                }
+
+                if (!event.getPlayer().getInventory().contains(Items.getDiscordItem())) {
+                    event.getPlayer().getInventory().setItem(8, Items.getDiscordItem());
                 }
             } else if(!event.getPlayer().getInventory().contains(NavigatorMenu.getItem())) {
                 event.getPlayer().getInventory().setItem(0, NavigatorMenu.getItem());
@@ -84,6 +96,12 @@ public class EventListener implements Listener {
                     } else {
                         if (event.getItem().equals(PlotSimplified.getItem())) {
                             event.getPlayer().performCommand("companion");
+                        } else {
+                            if (event.getItem().equals(Items.getDiscordItem())) {
+                                TextComponent message = new TextComponent(new TextComponent(ChatColor.GRAY + "[" + ChatColor.GOLD + "Join the Discord" + ChatColor.GRAY + "] >" + ChatColor.GREEN + " https://discord.gg/vgkspay"));
+                                message.setClickEvent(new ClickEvent(ClickEvent.Action.OPEN_URL, "https://discord.gg/vgkspay"));
+                                event.getPlayer().spigot().sendMessage(message);
+                            }
                         }
                     }
                 }
@@ -96,7 +114,7 @@ public class EventListener implements Listener {
         int slot = event.getSlot();
         ItemStack item = event.getWhoClicked().getInventory().getItem(slot);
         if (item != null) {
-            if (item.equals(NavigatorMenu.getItem()) || item.equals(TerraSimplified.getItem()) || item.equals(PlotSimplified.getItem())) {
+            if (item.equals(NavigatorMenu.getItem()) || item.equals(TerraSimplified.getItem()) || item.equals(PlotSimplified.getItem()) || item.equals(Items.getDiscordItem())) {
                 event.setCancelled(true);
             }
         }
@@ -105,9 +123,20 @@ public class EventListener implements Listener {
     @EventHandler
     public void onPlayerItemDropEvent(PlayerDropItemEvent event) {
         if(event.getItemDrop() != null) {
-            if (event.getItemDrop().getItemStack().equals(NavigatorMenu.getItem()) || event.getItemDrop().getItemStack().equals(PlotSimplified.getItem()) || event.getItemDrop().getItemStack().equals(TerraSimplified.getItem())) {
+            if (event.getItemDrop().getItemStack().equals(NavigatorMenu.getItem()) || event.getItemDrop().getItemStack().equals(PlotSimplified.getItem()) || event.getItemDrop().getItemStack().equals(TerraSimplified.getItem()) || event.getItemDrop().getItemStack().equals(Items.getDiscordItem())) {
                 event.setCancelled(true);
             }
+        }
+    }
+
+
+    @EventHandler
+    public void onDatabaseLoad(DatabaseLoadEvent e) {
+        HeadDatabaseAPI api = new HeadDatabaseAPI();
+        try {
+            Items.discordHead = api.getItemHead("29829");
+        } catch (NullPointerException ex) {
+            Bukkit.getLogger().log(Level.SEVERE, ex.getMessage(), ex);
         }
     }
 }
