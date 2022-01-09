@@ -111,6 +111,7 @@ public class EventListener implements Listener {
 
     @EventHandler
     public void onInventoryClickEvent(InventoryClickEvent event) {
+        if(event.getCurrentItem() == null || !event.getCurrentItem().hasItemMeta()) return;
         int slot = event.getSlot();
         ItemStack item = event.getWhoClicked().getInventory().getItem(slot);
         if (item != null) {
