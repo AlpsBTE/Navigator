@@ -6,7 +6,7 @@
 
     <groupId>com.alpsbte.navigator</groupId>
     <artifactId>AlpsBTE-Navigator</artifactId>
-    <version>3.3</version>
+    <version>4.0</version>
 
     <repositories>
         <!-- Spigot & Bukkit API -->
