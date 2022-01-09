@@ -38,7 +38,7 @@ public class EventListener implements Listener {
                 }
             }
 
-            List<String> builders = config.getStringList("builders");
+            /*List<String> builders = config.getStringList("builders");
             for(String builder : builders) {
                 if(event.getPlayer().getUniqueId().equals(UUID.fromString(builder))) {
                     try {

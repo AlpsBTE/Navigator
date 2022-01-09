@@ -19,7 +19,7 @@ public class Terra extends NavigatorItem {
 
     @Override
     public String getTitle() {
-        return "§b§lTERRA SERVER §7(Right Click)";
+        return "§b§lTERRA SERVER §7(Click)";
     }
 
     @Override

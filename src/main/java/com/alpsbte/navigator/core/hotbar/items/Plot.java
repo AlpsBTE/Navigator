@@ -19,7 +19,7 @@ public class Plot extends NavigatorItem {
 
     @Override
     public String getTitle() {
-        return "§b§lPLOT SYSTEM §7(Right Click)";
+        return "§b§lPLOT SYSTEM §7(Click)";
     }
 
     @Override

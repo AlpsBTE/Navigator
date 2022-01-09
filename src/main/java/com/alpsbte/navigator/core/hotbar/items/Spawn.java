@@ -18,7 +18,7 @@ public class Spawn extends NavigatorItem {
 
     @Override
     public String getTitle() {
-        return "§6§lSPAWN §7(Right Click)";
+        return "§6§lSPAWN §7(Click)";
     }
 
     @Override

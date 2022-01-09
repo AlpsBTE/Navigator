@@ -23,7 +23,7 @@ public class Event extends NavigatorItem {
 
     @Override
     public String getTitle() {
-        return config.getString(ConfigPaths.SERVERS_EVENT_TYPE_TITLE) + " §7(Right Click)";
+        return config.getString(ConfigPaths.SERVERS_EVENT_TYPE_TITLE) + " §7(Click)";
     }
 
     @Override

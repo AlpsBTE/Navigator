@@ -12,7 +12,7 @@ public abstract class NavigatorItem {
         if(NavigatorPlugin.getPlugin().checkServer(getIP(), getPort())) serverIsOnline = true;
     }
 
-    protected boolean serverIsOnline;
+    public boolean serverIsOnline;
 
     protected FileConfiguration config = NavigatorPlugin.getPlugin().getConfig();
 
