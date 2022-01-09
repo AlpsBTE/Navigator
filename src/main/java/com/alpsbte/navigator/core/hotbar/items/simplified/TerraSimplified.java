@@ -18,7 +18,7 @@ public class TerraSimplified extends Terra {
 
     @Override
     public String getTitle() {
-        return "§b§lVISIT US §7(Right Click)";
+        return "§b§lVisit Us §7(Right Click)";
     }
 
     @Override

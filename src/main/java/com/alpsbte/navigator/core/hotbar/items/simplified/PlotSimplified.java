@@ -19,7 +19,7 @@ public class PlotSimplified extends Plot {
 
     @Override
     public String getTitle() {
-        return "§b§lSTART BUILDING §7(Right Click)";
+        return "§b§lStart Building §7(Right Click)";
     }
 
     @Override
