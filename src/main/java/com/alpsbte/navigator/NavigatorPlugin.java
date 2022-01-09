@@ -16,10 +16,12 @@ import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.alpsbte.navigator.core.EventListener;
+import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.messaging.PluginMessageListener;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -37,6 +39,7 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
 
     private static NavigatorPlugin plugin;
     private static MultiverseCore multiverseCore;
+    private static LuckPerms luckPermsAPI;
 
     // Config
     private ConfigManager configManager;
@@ -58,6 +61,11 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     public void onEnable() {
         plugin = this;
         multiverseCore = (MultiverseCore) getServer().getPluginManager().getPlugin("Multiverse-Core");
+
+        RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
+        if (provider != null) {
+            luckPermsAPI = provider.getProvider();
+        } else Bukkit.getLogger().log(Level.WARNING, "Could not initialize LuckPerms API!");
 
         try {
             configManager = new ConfigManager();
@@ -206,6 +214,10 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     }
 
     public static MultiverseCore getMultiverseCore() { return multiverseCore; }
+
+    public static LuckPerms getLuckPerms() {
+        return luckPermsAPI;
+    }
 
     public static List<HolographicDisplay> getHolograms() { return holograms; }
 }
