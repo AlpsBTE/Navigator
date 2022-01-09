@@ -1,7 +1,7 @@
-package com.alpsbte.navigator.core.navigator;
+package com.alpsbte.navigator.core.hotbar;
 
 import com.alpsbte.navigator.core.config.ConfigPaths;
-import com.alpsbte.navigator.core.navigator.items.*;
+import com.alpsbte.navigator.core.hotbar.items.*;
 import com.alpsbte.navigator.utils.ItemBuilder;
 import com.alpsbte.navigator.NavigatorPlugin;
 import com.alpsbte.navigator.utils.Utils;

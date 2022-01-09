@@ -1,4 +1,4 @@
-package com.alpsbte.navigator.core.navigator.items;
+package com.alpsbte.navigator.core.hotbar.items;
 
 import org.bukkit.Material;
 
@@ -14,7 +14,7 @@ public class DefaultEvent extends Event {
 
     @Override
     public String getTitle() {
-        return "§b§lEVENT SERVER";
+        return "§b§lEVENT SERVER §7(Click)";
     }
 
     @Override

@@ -6,7 +6,7 @@
 
     <groupId>com.alpsbte.navigator</groupId>
     <artifactId>AlpsBTE-Navigator</artifactId>
-    <version>3.3</version>
+    <version>4.0</version>
 
     <repositories>
         <!-- Spigot & Bukkit API -->
@@ -103,6 +103,14 @@
             <artifactId>commons-io</artifactId>
             <version>2.6</version>
             <scope>compile</scope>
+        </dependency>
+
+        <!-- LuckPerms -->
+        <dependency>
+            <groupId>net.luckperms</groupId>
+            <artifactId>api</artifactId>
+            <version>5.3</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

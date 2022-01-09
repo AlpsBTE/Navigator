@@ -1,52 +1,52 @@
-package com.alpsbte.navigator.core.navigator.items;
+package com.alpsbte.navigator.core.hotbar.items;
 
 import com.alpsbte.navigator.NavigatorPlugin;
 import com.alpsbte.navigator.core.config.ConfigPaths;
+import com.alpsbte.navigator.core.hotbar.NavigatorItem;
 import com.alpsbte.navigator.utils.ItemBuilder;
 import com.alpsbte.navigator.utils.LoreBuilder;
-import com.alpsbte.navigator.core.navigator.NavigatorItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import java.util.Arrays;
 import java.util.List;
 
-public class Terra extends NavigatorItem {
+public class Plot extends NavigatorItem {
 
     @Override
     public Material getMaterial() {
-        return Material.BRICK;
+        return Material.WORKBENCH;
     }
 
     @Override
     public String getTitle() {
-        return "§b§lTERRA SERVER";
+        return "§b§lPLOT SYSTEM §7(Click)";
     }
 
     @Override
     public List<String> getDescription() {
         return Arrays.asList(
-                "Official Map (Terra 1:1) using Cubic Chunks.",
-                "Discover all three countries and build wherever you want."
+                "Choose a city, get a outline and start building on your plot.",
+                "When you are done, we will review it and add it to the Terra 1:1 world."
         );
     }
 
     @Override
     public List<String> getFeatures() {
         return Arrays.asList(
-                "Open World Using Cubic Chunks",
-                "Discover All 3 Countries",
-                "Build And Visit Wherever You Want"
+                "Vanilla (No Mods)",
+                "Easy To Use",
+                "Different difficulty levels"
         );
     }
 
     @Override
     public String getIP() {
-        return config.getString(ConfigPaths.SERVERS_TERRA_IP);
+        return config.getString(ConfigPaths.SERVERS_PLOT_IP);
     }
 
     @Override
     public int getPort() {
-        return config.getInt(ConfigPaths.SERVERS_TERRA_PORT);
+        return config.getInt(ConfigPaths.SERVERS_PLOT_PORT);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Terra extends NavigatorItem {
 
     @Override
     public boolean isModded() {
-        return true;
+        return false;
     }
 
     @Override
@@ -68,7 +68,7 @@ public class Terra extends NavigatorItem {
                         .emptyLine()
                         .features(getFeatures())
                         .emptyLine()
-                        .server(serverIsOnline, NavigatorPlugin.getPlugin().playerCountTERRA)
+                        .server(serverIsOnline, NavigatorPlugin.getPlugin().playerCountPLOT)
                         .emptyLine()
                         .version(getVersion(), isModded())
                         .build())

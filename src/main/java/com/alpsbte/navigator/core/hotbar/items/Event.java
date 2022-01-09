@@ -1,10 +1,10 @@
-package com.alpsbte.navigator.core.navigator.items;
+package com.alpsbte.navigator.core.hotbar.items;
 
 import com.alpsbte.navigator.core.config.ConfigPaths;
 import com.alpsbte.navigator.utils.ItemBuilder;
 import com.alpsbte.navigator.utils.LoreBuilder;
 import com.alpsbte.navigator.NavigatorPlugin;
-import com.alpsbte.navigator.core.navigator.NavigatorItem;
+import com.alpsbte.navigator.core.hotbar.NavigatorItem;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
@@ -23,7 +23,7 @@ public class Event extends NavigatorItem {
 
     @Override
     public String getTitle() {
-        return config.getString(ConfigPaths.SERVERS_EVENT_TYPE_TITLE);
+        return config.getString(ConfigPaths.SERVERS_EVENT_TYPE_TITLE) + " §7(Click)";
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.alpsbte.navigator.core.navigator;
+package com.alpsbte.navigator.core.hotbar;
 
 import com.alpsbte.navigator.NavigatorPlugin;
 import org.bukkit.Material;
@@ -12,7 +12,7 @@ public abstract class NavigatorItem {
         if(NavigatorPlugin.getPlugin().checkServer(getIP(), getPort())) serverIsOnline = true;
     }
 
-    protected boolean serverIsOnline;
+    public boolean serverIsOnline;
 
     protected FileConfiguration config = NavigatorPlugin.getPlugin().getConfig();
 
