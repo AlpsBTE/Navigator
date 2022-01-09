@@ -2,7 +2,7 @@ package com.alpsbte.navigator.core;
 
 import com.alpsbte.navigator.NavigatorPlugin;
 import com.alpsbte.navigator.core.config.ConfigPaths;
-import com.alpsbte.navigator.core.navigator.NavigatorMenu;
+import com.alpsbte.navigator.core.hotbar.NavigatorMenu;
 import com.alpsbte.navigator.utils.Utils;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;

@@ -8,7 +8,7 @@ import com.alpsbte.navigator.core.holograms.AccuracyJnRLeaderboard;
 import com.alpsbte.navigator.core.holograms.EventInfoHologram;
 import com.alpsbte.navigator.core.holograms.HolographicDisplay;
 import com.alpsbte.navigator.core.holograms.SpeedJnRLeaderboard;
-import com.alpsbte.navigator.core.navigator.NavigatorMenu;
+import com.alpsbte.navigator.core.hotbar.NavigatorMenu;
 import com.alpsbte.navigator.utils.PortalManager;
 import com.alpsbte.navigator.utils.Utils;
 import com.google.common.io.ByteArrayDataInput;

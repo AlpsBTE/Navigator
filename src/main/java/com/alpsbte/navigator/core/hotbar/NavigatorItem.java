@@ -1,4 +1,4 @@
-package com.alpsbte.navigator.core.navigator;
+package com.alpsbte.navigator.core.hotbar;
 
 import com.alpsbte.navigator.NavigatorPlugin;
 import org.bukkit.Material;

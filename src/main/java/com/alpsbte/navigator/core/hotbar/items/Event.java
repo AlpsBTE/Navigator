@@ -1,10 +1,10 @@
-package com.alpsbte.navigator.core.navigator.items;
+package com.alpsbte.navigator.core.hotbar.items;
 
 import com.alpsbte.navigator.core.config.ConfigPaths;
 import com.alpsbte.navigator.utils.ItemBuilder;
 import com.alpsbte.navigator.utils.LoreBuilder;
 import com.alpsbte.navigator.NavigatorPlugin;
-import com.alpsbte.navigator.core.navigator.NavigatorItem;
+import com.alpsbte.navigator.core.hotbar.NavigatorItem;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemFlag;
