@@ -62,7 +62,7 @@ public class NavigatorMenu {
 
             if(terra.serverIsOnline) {
                 clickPlayer.sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
-                NavigatorPlugin.getPlugin().connectPlayer(clickPlayer, "ALPS-2");
+                NavigatorPlugin.getPlugin().connectPlayer(clickPlayer, Utils.TERRA_SERVER);
             } else {
                 clickPlayer.sendMessage(Utils.getErrorMessageFormat("Server is offline"));
             }
@@ -71,7 +71,7 @@ public class NavigatorMenu {
 
 
         //Set Event item
-        Event event;
+        /*Event event;
         if(!config.getBoolean(ConfigPaths.SERVERS_EVENT_VISIBLE) && !player.hasPermission("alpsbte.joinEventStaff")) {
             event = new DefaultEvent();
         } else if(!config.getBoolean(ConfigPaths.SERVERS_EVENT_VISIBLE)) {
@@ -85,6 +85,21 @@ public class NavigatorMenu {
         navigatorMenu.getSlot(22).setClickHandler((clickPlayer, clickInformation) -> {
             clickPlayer.closeInventory();
             clickPlayer.performCommand("event");
+        });*/
+
+
+        // Set VIENNA Server item
+        Vienna vienna = new Vienna();
+        navigatorMenu.getSlot(22).setItem(vienna.createItem());
+        navigatorMenu.getSlot(22).setClickHandler((clickPlayer, clickInformation) -> {
+            clickPlayer.closeInventory();
+
+            if(vienna.serverIsOnline) {
+                clickPlayer.sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
+                NavigatorPlugin.getPlugin().connectPlayer(clickPlayer, Utils.VIENNA_SERVER);
+            } else {
+                clickPlayer.sendMessage(Utils.getErrorMessageFormat("Server is offline"));
+            }
         });
 
 

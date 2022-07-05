@@ -5,6 +5,7 @@ import com.alpsbte.navigator.core.config.ConfigPaths;
 import com.alpsbte.navigator.core.hotbar.NavigatorMenu;
 import com.alpsbte.navigator.core.hotbar.items.simplified.PlotSimplified;
 import com.alpsbte.navigator.core.hotbar.items.simplified.TerraSimplified;
+import com.alpsbte.navigator.core.hotbar.items.simplified.ViennaSimplified;
 import com.alpsbte.navigator.utils.Items;
 import com.alpsbte.navigator.utils.Utils;
 import me.arcaniax.hdb.api.DatabaseLoadEvent;
@@ -15,6 +16,7 @@ import net.md_5.bungee.api.chat.TextComponent;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -27,7 +29,7 @@ import java.util.logging.Level;
 
 public class EventListener implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerJoinEvent(PlayerJoinEvent event) {
         event.getPlayer().teleport(Utils.getSpawnLocation());
 
@@ -37,6 +39,7 @@ public class EventListener implements Listener {
             if (NavigatorPlugin.getLuckPerms() != null && !event.getPlayer().hasPermission("group.builder")) {
                 ItemStack terraSimplifiedItem = TerraSimplified.getItem();
                 ItemStack plotSimplifiedItem = PlotSimplified.getItem();
+                ItemStack viennaSimplifiedItem = ViennaSimplified.getItem();
 
                 if (!event.getPlayer().getInventory().contains(terraSimplifiedItem)) {
                     event.getPlayer().getInventory().setItem(0, terraSimplifiedItem);
@@ -44,6 +47,10 @@ public class EventListener implements Listener {
 
                 if (!event.getPlayer().getInventory().contains(plotSimplifiedItem)) {
                     event.getPlayer().getInventory().setItem(1, plotSimplifiedItem);
+                }
+
+                if (!event.getPlayer().getInventory().contains(viennaSimplifiedItem)) {
+                    event.getPlayer().getInventory().setItem(2, viennaSimplifiedItem);
                 }
 
                 if (!event.getPlayer().getInventory().contains(Items.getDiscordItem())) {
@@ -86,10 +93,18 @@ public class EventListener implements Listener {
                     NavigatorPlugin.getPlugin().UpdatePlayerCount(event.getPlayer());
                 } else {
                     TerraSimplified terra = new TerraSimplified();
+                    ViennaSimplified vienna = new ViennaSimplified();
                     if (event.getItem().equals(TerraSimplified.getItem())) {
                         if (terra.serverIsOnline) {
                             event.getPlayer().sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
-                            NavigatorPlugin.getPlugin().connectPlayer(event.getPlayer(), "ALPS-2");
+                            NavigatorPlugin.getPlugin().connectPlayer(event.getPlayer(), Utils.TERRA_SERVER);
+                        } else {
+                            event.getPlayer().sendMessage(Utils.getErrorMessageFormat("Server is offline"));
+                        }
+                    } else if(event.getItem().equals(ViennaSimplified.getItem())) {
+                        if (vienna.serverIsOnline) {
+                            event.getPlayer().sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
+                            NavigatorPlugin.getPlugin().connectPlayer(event.getPlayer(), Utils.VIENNA_SERVER);
                         } else {
                             event.getPlayer().sendMessage(Utils.getErrorMessageFormat("Server is offline"));
                         }
@@ -115,7 +130,7 @@ public class EventListener implements Listener {
         int slot = event.getSlot();
         ItemStack item = event.getWhoClicked().getInventory().getItem(slot);
         if (item != null) {
-            if (item.equals(NavigatorMenu.getItem()) || item.equals(TerraSimplified.getItem()) || item.equals(PlotSimplified.getItem()) || item.equals(Items.getDiscordItem())) {
+            if (item.equals(NavigatorMenu.getItem()) || item.equals(TerraSimplified.getItem()) || item.equals(PlotSimplified.getItem()) || item.equals(Items.getDiscordItem()) || item.equals(ViennaSimplified.getItem())) {
                 event.setCancelled(true);
             }
         }
@@ -124,7 +139,7 @@ public class EventListener implements Listener {
     @EventHandler
     public void onPlayerItemDropEvent(PlayerDropItemEvent event) {
         if(event.getItemDrop() != null) {
-            if (event.getItemDrop().getItemStack().equals(NavigatorMenu.getItem()) || event.getItemDrop().getItemStack().equals(PlotSimplified.getItem()) || event.getItemDrop().getItemStack().equals(TerraSimplified.getItem()) || event.getItemDrop().getItemStack().equals(Items.getDiscordItem())) {
+            if (event.getItemDrop().getItemStack().equals(NavigatorMenu.getItem()) || event.getItemDrop().getItemStack().equals(PlotSimplified.getItem()) || event.getItemDrop().getItemStack().equals(TerraSimplified.getItem()) || event.getItemDrop().getItemStack().equals(Items.getDiscordItem()) || event.getItemDrop().getItemStack().equals(PlotSimplified.getItem())) {
                 event.setCancelled(true);
             }
         }

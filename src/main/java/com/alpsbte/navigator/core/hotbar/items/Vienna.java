@@ -7,51 +7,48 @@ import com.alpsbte.navigator.utils.ItemBuilder;
 import com.alpsbte.navigator.utils.LoreBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
+
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
-public class Plot extends NavigatorItem {
-
+public class Vienna extends NavigatorItem {
     @Override
     public Material getMaterial() {
-        return Material.WORKBENCH;
+        return Material.MAGMA;
     }
 
     @Override
     public String getTitle() {
-        return "§b§lPLOT SYSTEM §7(Click)";
+        return "§b§lVIENNA 1.18 §c(NEW)";
     }
 
     @Override
     public List<String> getDescription() {
         return Arrays.asList(
-                "Choose a city, get a outline and start building on your plot.",
-                "When you are done, we will review it and add it to the Terra 1:1 world."
+                "Experience the BuildTheEarth project on a whole new level",
+                "by using version 1.18+ for building."
         );
     }
 
     @Override
     public List<String> getFeatures() {
-        return Arrays.asList(
-                "Vanilla (No Mods)",
-                "Easy To Use",
-                "Different difficulty levels"
-        );
+        return null;
     }
 
     @Override
     public String getIP() {
-        return config.getString(ConfigPaths.SERVERS_PLOT_IP);
+        return config.getString(ConfigPaths.SERVERS_VIENNA_IP);
     }
 
     @Override
     public int getPort() {
-        return config.getInt(ConfigPaths.SERVERS_PLOT_PORT);
+        return config.getInt(ConfigPaths.SERVERS_VIENNA_PORT);
     }
 
     @Override
     public String getVersion() {
-        return "1.12.2 - 1.19";
+        return "1.18 - 1.19";
     }
 
     @Override
@@ -66,9 +63,7 @@ public class Plot extends NavigatorItem {
                 .setLore(new LoreBuilder()
                         .description(getDescription())
                         .emptyLine()
-                        .features(getFeatures())
-                        .emptyLine()
-                        .server(serverIsOnline, NavigatorPlugin.getPlugin().playerCountPLOT)
+                        .server(serverIsOnline, NavigatorPlugin.getPlugin().playerCountVIENNA)
                         .emptyLine()
                         .version(getVersion(), isModded())
                         .build())

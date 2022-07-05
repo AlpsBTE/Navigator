@@ -28,7 +28,7 @@ public class Utils {
 
     public final static String EVENT_SERVER = "ALPS-3";
 
-    public final static String TEST_SERVER = "ALPS-4";
+    public final static String VIENNA_SERVER = "ALPS-5";
 
     // Spawn Location
     public static Location getSpawnLocation() {

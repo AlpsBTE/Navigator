@@ -29,6 +29,11 @@ public class ConfigPaths {
     public static final String SERVERS_EVENT_TYPE_START_DATE = SERVERS_EVENT_TYPE + "startDate";
     public static final String SERVERS_EVENT_TYPE_END_DATE = SERVERS_EVENT_TYPE + "endDate";
 
+
+    private static final String SERVERS_VIENNA = SERVERS + "vienna.";
+    public static final String SERVERS_VIENNA_IP = SERVERS_VIENNA + "IP";
+    public static final String SERVERS_VIENNA_PORT = SERVERS_VIENNA + "port";
+
     // Holograms
     public static final String HOLOGRAMS = "holograms.";
     public static final String HOLOGRAMS_ENABLED = ".enabled";

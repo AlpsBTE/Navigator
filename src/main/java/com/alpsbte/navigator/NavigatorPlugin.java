@@ -56,6 +56,7 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     public int playerCountPLOT = 0;
     public int playerCountTERRA = 0;
     public int playerCountEVENT = 0;
+    public int playerCountVIENNA = 0;
 
     @Override
     public void onEnable() {
@@ -103,6 +104,7 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
             getCount(player, Utils.PLOT_SERVER);
             getCount(player, Utils.TERRA_SERVER);
             getCount(player, Utils.EVENT_SERVER);
+            getCount(player, Utils.VIENNA_SERVER);
 
             BukkitRunnable task = new BukkitRunnable() {
                 @Override
@@ -131,6 +133,9 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
                         break;
                     case Utils.EVENT_SERVER:
                         playerCountEVENT = in.readInt();
+                        break;
+                    case Utils.VIENNA_SERVER:
+                        playerCountVIENNA = in.readInt();
                         break;
                 }
             }

@@ -27,6 +27,9 @@ servers:
       description: test/test/test
       startDate: 20.02.2021 02:25 AM
       endDate: 20.02.2021 02:25 AM
+  vienna:
+    IP: localhost
+    port: 0000
 
 # -----------------------------------------------------
 # | Holograms: Show statistics and info / Are placed in the spawn world
@@ -53,4 +56,4 @@ holograms:
     z: 0
 
 # NOTE: Do not change
-config-version: 1.0
+config-version: 1.1
