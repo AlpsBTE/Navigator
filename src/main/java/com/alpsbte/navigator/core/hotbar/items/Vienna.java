@@ -20,7 +20,7 @@ public class Vienna extends NavigatorItem {
 
     @Override
     public String getTitle() {
-        return "§b§lVIENNA 1.18 §c(NEW)";
+        return "§b§lVIENNA 1.19 §c(NEW)";
     }
 
     @Override

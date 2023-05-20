@@ -59,6 +59,7 @@ public class EventListener implements Listener {
             } else if(!event.getPlayer().getInventory().contains(NavigatorMenu.getItem())) {
                 event.getPlayer().getInventory().setItem(0, NavigatorMenu.getItem());
                 event.getPlayer().getInventory().setItem(1, null);
+                event.getPlayer().getInventory().setItem(2, null);
             }
 
             if(config.getBoolean(ConfigPaths.SERVERS_PLOT_ENABLE_JOIN_MESSAGE)) {
