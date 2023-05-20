@@ -81,9 +81,13 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 
         // Start Holograms
-        if (isHolographicDisplaysEnabled()) {
-            HolographicDisplay.registerPlugin(this);
-            HologramManager.reloadHolograms();
+        try {
+            if (isHolographicDisplaysEnabled()) {
+                HolographicDisplay.registerPlugin(this);
+                HologramManager.reloadHolograms();
+            }
+        } catch (Exception ex) {
+            Bukkit.getLogger().log(Level.SEVERE, "An error occurred while initializing holograms!", ex);
         }
 
         new PortalManager().start();
