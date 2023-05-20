@@ -1,78 +1,44 @@
 package com.alpsbte.navigator.core.holograms;
 
+import com.alpsbte.alpslib.hologram.HolographicPagedDisplay;
 import com.alpsbte.navigator.NavigatorPlugin;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
-public class AccuracyJnRLeaderboard extends HolographicDisplay {
-
-    public AccuracyJnRLeaderboard() {
-        super("accuracy-JnR-leaderboard");
+public class AccuracyJnRLeaderboard extends HolographicPagedDisplay {
+    protected AccuracyJnRLeaderboard(String id) {
+        super(id, NavigatorPlugin.getPlugin());
     }
 
     @Override
-    protected String getTitle() {
+    public String getTitle() {
         return "§b§lACCURACY PARKOUR LEADERBOARD";
     }
 
     @Override
-    protected List<String> getDataLines() {
-        FileConfiguration parkourConfig = NavigatorPlugin.getPlugin().getLeaderboardConfig();
-        List<String> parkourScores = new ArrayList<>();
-
-        for (String uuid : parkourConfig.getConfigurationSection("History").getKeys(false)) {
-            int score = 0;
-            for (String item : parkourConfig.getConfigurationSection("History." + uuid + ".AccuracyJumpAndRun").getKeys(false)) {
-                score += parkourConfig.getInt("History."+uuid+".AccuracyJumpAndRun."+item);
-            }
-
-            String playerName = Bukkit.getOfflinePlayer(UUID.fromString(uuid)).getName();
-            parkourScores.add((playerName == null ? "Player" : playerName) + "," + score);
-        }
-
-        HashMap<String,Integer> hashMap = new HashMap<>();
-
-        for (String item : parkourScores) {
-            hashMap.put(item.split(",")[0],Integer.parseInt(item.split(",")[1]));
-        }
-
-        LinkedHashMap<String, Integer> reverseSortedMap = new LinkedHashMap<>();
-
-        hashMap.entrySet()
-                .stream()
-                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
-                .forEachOrdered(x -> reverseSortedMap.put(x.getKey(), x.getValue()));
-
-        List<String> returnList = new ArrayList<>();
-
-        for(Map.Entry<String, Integer> entry : reverseSortedMap.entrySet()) {
-            String key = entry.getKey();
-            Integer value = entry.getValue();
-
-            Date date = new Date(value);
-            DateFormat formatter = new SimpleDateFormat("mm:ss:SSS");
-            formatter.setTimeZone(TimeZone.getTimeZone("UTC"));
-            String dateFormatted = formatter.format(date);
-
-            returnList.add(key+","+dateFormatted);
-        }
-
-        Collections.reverse(returnList);
-        if (returnList.size()>10){
-            returnList.subList(10,returnList.size()).clear();
-        }
-
-        return returnList;
+    public ItemStack getItem() {
+        return new ItemStack(Material.FEATHER);
     }
 
     @Override
-    protected ItemStack getItem() {
-        return new ItemStack(Material.FEATHER);
+    public List<DataLine<?>> getContent() {
+        return HologramManager.getLeaderboardContent("JumpAndRunDifficult");
+    }
+
+    @Override
+    public List<DataLine<?>> getFooter() {
+        return Collections.singletonList(new TextLine(contentSeparator));
+    }
+
+    @Override
+    public long getInterval() {
+        return 20*30;
+    }
+
+    @Override
+    public List<String> getPages() {
+        return Collections.singletonList("accuracy-jnr-leaderboard");
     }
 }

@@ -1,52 +1,55 @@
 package com.alpsbte.navigator.core.holograms;
 
+import com.alpsbte.alpslib.hologram.HolographicDisplay;
 import com.alpsbte.navigator.NavigatorPlugin;
 import com.alpsbte.navigator.core.config.ConfigPaths;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class EventInfoHologram extends HolographicDisplay {
-    public EventInfoHologram() {
-        super("event-info");
+    private final boolean isEventVisible;
+
+    protected EventInfoHologram(String id) {
+        super(id);
+        isEventVisible = NavigatorPlugin.getPlugin().getConfig().getBoolean(ConfigPaths.SERVERS_EVENT_VISIBLE);
     }
 
     @Override
-    protected String getTitle() {
-        return ("§6§lEVENT-SERVER");
-    }
-
-    @Override
-    protected void insertLines() {
-        getHologram().insertTextLine(0, getTitle());
-        getHologram().insertTextLine(1, "§r");
-
-        if(NavigatorPlugin.getPlugin().getConfig().getBoolean(ConfigPaths.SERVERS_EVENT_VISIBLE)) {
-            List<String> data = getDataLines();
-            for(int i = 2; i < data.size() + 2; i++) {
-                getHologram().insertTextLine(i, data.get(i - 2));
-            }
-        } else {
-            getHologram().insertTextLine(2, "§2There is currently no event...");
-        }
-    }
-
-    @Override
-    public void updateHologram() {
-        if(isPlaced() && getHologram() != null) {
-            getHologram().clearLines();
-            insertLines();
-        }
-    }
-
-    @Override
-    protected List<String> getDataLines() {
-        return Arrays.asList(NavigatorPlugin.getPlugin().getConfig().getString(ConfigPaths.SERVERS_EVENT_TYPE_DESCRIPTION).split("/"));
-    }
-
-    @Override
-    protected ItemStack getItem() {
+    public ItemStack getItem() {
         return null;
+    }
+
+    @Override
+    public String getTitle() {
+        return isEventVisible ? NavigatorPlugin.getPlugin().getConfig().getString(ConfigPaths.SERVERS_EVENT_TYPE_TITLE) : "§6§lEVENT-SERVER";
+    }
+
+    @Override
+    public List<DataLine<?>> getHeader() {
+        return Arrays.asList(
+                new TextLine(getTitle()),
+                new TextLine("§r")
+        );
+    }
+
+    @Override
+    public List<DataLine<?>> getContent() {
+        if (!isEventVisible) {
+            return Collections.singletonList(new TextLine("§2There is currently no event..."));
+        } else {
+            List<String> lines = Arrays.asList(NavigatorPlugin.getPlugin().getConfig().getString(ConfigPaths.SERVERS_EVENT_TYPE_DESCRIPTION).split("\\\\n"));
+            List<DataLine<?>> dataLines = new ArrayList<>();
+            lines.forEach(line -> dataLines.add(new TextLine(line.replace("\\n", ""))));
+            return dataLines;
+        }
+    }
+
+    @Override
+    public List<DataLine<?>> getFooter() {
+        return Collections.singletonList(new TextLine("§r"));
     }
 }

@@ -1,7 +1,7 @@
 package com.alpsbte.navigator.commands;
 
-import com.alpsbte.navigator.NavigatorPlugin;
-import com.alpsbte.navigator.core.holograms.HolographicDisplay;
+import com.alpsbte.alpslib.hologram.HolographicDisplay;
+import com.alpsbte.navigator.core.holograms.HologramManager;
 import com.alpsbte.navigator.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,25 +16,25 @@ public class CMD_SetHologram implements CommandExecutor {
             if (sender.hasPermission("alpsbte.admin")){
                 if (args.length == 1) {
                     // Find hologram by name
-                    HolographicDisplay hologram = NavigatorPlugin.getHolograms().stream()
-                            .filter(holo -> holo.getHologramName().equalsIgnoreCase(args[0]))
+                    HolographicDisplay hologram = HologramManager.getHolograms().stream()
+                            .filter(holo -> holo.getId().equalsIgnoreCase(args[0]))
                             .findFirst()
                             .orElse(null);
 
                     // Update hologram location
                     if(hologram != null) {
-                        hologram.setLocation(player.getLocation());
+                        HologramManager.savePosition(hologram.getId(), player.getLocation());
                         player.sendMessage(Utils.getInfoMessageFormat("Successfully updated hologram location!"));
 
-                        NavigatorPlugin.reloadHolograms();
+                        HologramManager.reloadHolograms();
                     } else {
                         player.sendMessage(Utils.getErrorMessageFormat("Hologram could not be found!"));
                     }
                 } else {
                     player.sendMessage(Utils.getErrorMessageFormat("§lUsage: §c/sethologram <name>"));
                     player.sendMessage("§7------- §6§lHolograms §7-------");
-                    for(HolographicDisplay holo : NavigatorPlugin.getHolograms()) {
-                        player.sendMessage(" §6> §f" + holo.getHologramName());
+                    for(HolographicDisplay holo : HologramManager.getHolograms()) {
+                        player.sendMessage(" §6> §f" + holo.getId());
                     }
                     player.sendMessage("§7--------------------------");
                 }

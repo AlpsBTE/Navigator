@@ -1,9 +1,9 @@
 main: com.alpsbte.navigator.NavigatorPlugin
-version: 4.0
+version: 4.1
 api-version: 1.12.2
 name: AlpsBTE-Navigator
 author: R3tuxn
-depend: [Multiverse-Core, Plot-System, LeakParkour]
+depend: [Multiverse-Core, Plot-System, LeakParkour, HolographicDisplays]
 
 commands:
   navigator:

@@ -1,13 +1,10 @@
 package com.alpsbte.navigator;
 
+import com.alpsbte.alpslib.hologram.HolographicDisplay;
 import com.alpsbte.navigator.commands.*;
 import com.alpsbte.navigator.core.config.ConfigManager;
 import com.alpsbte.navigator.core.config.ConfigNotImplementedException;
-import com.alpsbte.navigator.core.config.ConfigPaths;
-import com.alpsbte.navigator.core.holograms.AccuracyJnRLeaderboard;
-import com.alpsbte.navigator.core.holograms.EventInfoHologram;
-import com.alpsbte.navigator.core.holograms.HolographicDisplay;
-import com.alpsbte.navigator.core.holograms.SpeedJnRLeaderboard;
+import com.alpsbte.navigator.core.holograms.HologramManager;
 import com.alpsbte.navigator.core.hotbar.NavigatorMenu;
 import com.alpsbte.navigator.utils.PortalManager;
 import com.alpsbte.navigator.utils.Utils;
@@ -31,8 +28,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.Arrays;
-import java.util.List;
 import java.util.logging.Level;
 
 public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener {
@@ -45,13 +40,6 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     private ConfigManager configManager;
     private FileConfiguration plotSystemConfig;
     private FileConfiguration leaderboardConfig;
-
-    // Holograms
-    private static final List<HolographicDisplay> holograms = Arrays.asList(
-            new SpeedJnRLeaderboard(),
-            new AccuracyJnRLeaderboard(),
-            new EventInfoHologram()
-    );
 
     public int playerCountPLOT = 0;
     public int playerCountTERRA = 0;
@@ -92,7 +80,11 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         this.getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         this.getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 
-        reloadHolograms();
+        // Start Holograms
+        if (isHolographicDisplaysEnabled()) {
+            HolographicDisplay.registerPlugin(this);
+            HologramManager.reloadHolograms();
+        }
 
         new PortalManager().start();
 
@@ -171,16 +163,6 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         return false;
     }
 
-    public static void reloadHolograms() {
-        for (HolographicDisplay hologram : holograms) {
-            if(getPlugin().getConfig().getBoolean(hologram.getDefaultPath() + ConfigPaths.HOLOGRAMS_ENABLED)) {
-                hologram.show();
-            } else {
-                hologram.hide();
-            }
-        }
-    }
-
     @Override
     public FileConfiguration getConfig() {
         return this.configManager.getConfig();
@@ -214,6 +196,10 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         return plotSystemConfig;
     }
 
+    public static boolean isHolographicDisplaysEnabled() {
+        return plugin.getServer().getPluginManager().isPluginEnabled("HolographicDisplays");
+    }
+
     public static NavigatorPlugin getPlugin() {
         return plugin;
     }
@@ -223,6 +209,4 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     public static LuckPerms getLuckPerms() {
         return luckPermsAPI;
     }
-
-    public static List<HolographicDisplay> getHolograms() { return holograms; }
 }

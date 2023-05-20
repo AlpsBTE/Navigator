@@ -1,6 +1,7 @@
 package com.alpsbte.navigator.commands;
 
 import com.alpsbte.navigator.NavigatorPlugin;
+import com.alpsbte.navigator.core.holograms.HologramManager;
 import com.alpsbte.navigator.utils.Utils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,7 +17,7 @@ public class CMD_Reload implements CommandExecutor {
                 NavigatorPlugin.getPlugin().saveConfig();
                 sender.sendMessage(Utils.getInfoMessageFormat("Successfully reloaded config!"));
 
-                NavigatorPlugin.reloadHolograms();
+                HologramManager.reloadHolograms();
                 sender.sendMessage(Utils.getInfoMessageFormat("Successfully reloaded holograms!"));
             }
         }
