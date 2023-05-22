@@ -2,7 +2,7 @@ package com.alpsbte.navigator.core.holograms;
 
 import com.alpsbte.alpslib.hologram.HolographicDisplay;
 import com.alpsbte.navigator.NavigatorPlugin;
-import com.alpsbte.navigator.core.config.ConfigPaths;
+import com.alpsbte.navigator.utils.config.ConfigPaths;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -11,11 +11,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class EventInfoHologram extends HolographicDisplay {
-    private final boolean isEventVisible;
-
     protected EventInfoHologram(String id) {
         super(id);
-        isEventVisible = NavigatorPlugin.getPlugin().getConfig().getBoolean(ConfigPaths.SERVERS_EVENT_VISIBLE);
     }
 
     @Override
@@ -25,7 +22,8 @@ public class EventInfoHologram extends HolographicDisplay {
 
     @Override
     public String getTitle() {
-        return isEventVisible ? NavigatorPlugin.getPlugin().getConfig().getString(ConfigPaths.SERVERS_EVENT_TYPE_TITLE) : "§6§lEVENT-SERVER";
+        return NavigatorPlugin.getPlugin().getConfig().getBoolean(ConfigPaths.SERVERS_EVENT_VISIBLE) ?
+                NavigatorPlugin.getPlugin().getConfig().getString(ConfigPaths.SERVERS_EVENT_TYPE_TITLE) : "§6§lEVENT-SERVER";
     }
 
     @Override
@@ -38,7 +36,7 @@ public class EventInfoHologram extends HolographicDisplay {
 
     @Override
     public List<DataLine<?>> getContent() {
-        if (!isEventVisible) {
+        if (!NavigatorPlugin.getPlugin().getConfig().getBoolean(ConfigPaths.SERVERS_EVENT_VISIBLE)) {
             return Collections.singletonList(new TextLine("§2There is currently no event..."));
         } else {
             List<String> lines = Arrays.asList(NavigatorPlugin.getPlugin().getConfig().getString(ConfigPaths.SERVERS_EVENT_TYPE_DESCRIPTION).split("\\\\n"));

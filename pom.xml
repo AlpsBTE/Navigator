@@ -6,7 +6,7 @@
 
     <groupId>com.alpsbte.navigator</groupId>
     <artifactId>AlpsBTE-Navigator</artifactId>
-    <version>4.1</version>
+    <version>4.2</version>
 
     <repositories>
         <!-- AlpsBTE Library -->
@@ -79,6 +79,14 @@
             <artifactId>Multiverse-Core</artifactId>
             <version>4.3.0</version>
             <scope>provided</scope>
+        </dependency>
+
+        <!-- Alps Utils & IO -->
+        <dependency>
+            <groupId>com.alpsbte.alpslib</groupId>
+            <artifactId>alpslib-io</artifactId>
+            <version>1.0.18</version>
+            <scope>compile</scope>
         </dependency>
 
         <!-- Holograms -->
