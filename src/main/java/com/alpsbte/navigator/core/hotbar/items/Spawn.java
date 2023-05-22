@@ -1,9 +1,9 @@
 package com.alpsbte.navigator.core.hotbar.items;
 
-import com.alpsbte.navigator.core.config.ConfigPaths;
+import com.alpsbte.alpslib.utils.item.ItemBuilder;
+import com.alpsbte.navigator.utils.config.ConfigPaths;
 import com.alpsbte.navigator.core.hotbar.NavigatorItem;
-import com.alpsbte.navigator.utils.ItemBuilder;
-import com.alpsbte.navigator.utils.LoreBuilder;
+import com.alpsbte.navigator.utils.ServerLoreBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import java.util.Collections;
@@ -55,7 +55,7 @@ public class Spawn extends NavigatorItem {
     public ItemStack createItem() {
         return new ItemBuilder(getMaterial(), 1)
                 .setName(getTitle())
-                .setLore(new LoreBuilder()
+                .setLore(new ServerLoreBuilder()
                         .description(getDescription())
                         .build())
                 .build();

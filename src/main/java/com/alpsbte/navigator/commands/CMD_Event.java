@@ -1,7 +1,7 @@
 package com.alpsbte.navigator.commands;
 
 import com.alpsbte.navigator.NavigatorPlugin;
-import com.alpsbte.navigator.core.config.ConfigPaths;
+import com.alpsbte.navigator.utils.config.ConfigPaths;
 import com.alpsbte.navigator.core.hotbar.items.Event;
 import com.alpsbte.navigator.utils.Utils;
 import org.bukkit.command.Command;

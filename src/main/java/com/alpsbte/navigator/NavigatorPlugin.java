@@ -1,13 +1,14 @@
 package com.alpsbte.navigator;
 
 import com.alpsbte.alpslib.hologram.HolographicDisplay;
+import com.alpsbte.alpslib.io.YamlFileFactory;
+import com.alpsbte.alpslib.io.config.ConfigNotImplementedException;
 import com.alpsbte.navigator.commands.*;
-import com.alpsbte.navigator.core.config.ConfigManager;
-import com.alpsbte.navigator.core.config.ConfigNotImplementedException;
 import com.alpsbte.navigator.core.holograms.HologramManager;
 import com.alpsbte.navigator.core.hotbar.NavigatorMenu;
 import com.alpsbte.navigator.utils.PortalManager;
 import com.alpsbte.navigator.utils.Utils;
+import com.alpsbte.navigator.utils.config.ConfigUtil;
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -15,6 +16,7 @@ import com.onarandombox.MultiverseCore.MultiverseCore;
 import com.alpsbte.navigator.core.EventListener;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
@@ -37,7 +39,6 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     private static LuckPerms luckPermsAPI;
 
     // Config
-    private ConfigManager configManager;
     private FileConfiguration plotSystemConfig;
     private FileConfiguration leaderboardConfig;
 
@@ -49,6 +50,7 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     @Override
     public void onEnable() {
         plugin = this;
+        YamlFileFactory.registerPlugin(this);
         multiverseCore = (MultiverseCore) getServer().getPluginManager().getPlugin("Multiverse-Core");
 
         RegisteredServiceProvider<LuckPerms> provider = Bukkit.getServicesManager().getRegistration(LuckPerms.class);
@@ -57,12 +59,15 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         } else Bukkit.getLogger().log(Level.WARNING, "Could not initialize LuckPerms API!");
 
         try {
-            configManager = new ConfigManager();
+            ConfigUtil.init();
         } catch (ConfigNotImplementedException ex) {
+            Bukkit.getLogger().log(Level.WARNING, "Could not load configuration file.");
+            Bukkit.getConsoleSender().sendMessage(ChatColor.YELLOW + "The config file must be configured!");
+
+            this.getServer().getPluginManager().disablePlugin(this);
             return;
         }
-
-        reloadConfig();
+        ConfigUtil.getInstance().reloadFiles();
 
         // Add Listeners
         this.getServer().getPluginManager().registerEvents(new EventListener(), plugin);
@@ -95,7 +100,7 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
         getLogger().log(Level.INFO, "Successfully enabled AlpsBTE-Navigator plugin.");
     }
 
-    public void UpdatePlayerCount(Player player) {
+    public void updatePlayerCount(Player player) {
         new Thread(() -> {
             getCount(player, Utils.PLOT_SERVER);
             getCount(player, Utils.TERRA_SERVER);
@@ -159,8 +164,7 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
     }
 
     public boolean checkServer(String IP, int port) {
-        Socket s = new Socket();
-        try {
+        try (Socket s = new Socket()) {
             s.connect(new InetSocketAddress(IP, port), 30); //good timeout is 10-20
             return true;
         } catch (IOException ignored) {}
@@ -169,17 +173,17 @@ public class NavigatorPlugin extends JavaPlugin implements PluginMessageListener
 
     @Override
     public FileConfiguration getConfig() {
-        return this.configManager.getConfig();
+        return ConfigUtil.getInstance().configs[0];
     }
 
     @Override
     public void reloadConfig() {
-        this.configManager.reloadConfig();
+        ConfigUtil.getInstance().reloadFiles();
     }
 
     @Override
     public void saveConfig() {
-        this.configManager.saveConfig();
+        ConfigUtil.getInstance().saveFiles();
     }
 
     public FileConfiguration getLeaderboardConfig() {

@@ -1,8 +1,8 @@
 package com.alpsbte.navigator.core.hotbar.items.simplified;
 
+import com.alpsbte.alpslib.utils.item.ItemBuilder;
 import com.alpsbte.navigator.core.hotbar.items.Vienna;
-import com.alpsbte.navigator.utils.ItemBuilder;
-import com.alpsbte.navigator.utils.LoreBuilder;
+import com.alpsbte.navigator.utils.ServerLoreBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -16,7 +16,7 @@ public class ViennaSimplified extends Vienna {
     public ItemStack createItem() {
         return new ItemBuilder(getMaterial(), 1)
                 .setName(getTitle())
-                .setLore(new LoreBuilder()
+                .setLore(new ServerLoreBuilder()
                         .description(getDescription())
                         .emptyLine()
                         .version(getVersion(), isModded())

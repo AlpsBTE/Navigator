@@ -1,15 +1,11 @@
 package com.alpsbte.navigator.core.hotbar;
 
-import com.alpsbte.navigator.core.config.ConfigPaths;
+import com.alpsbte.alpslib.utils.item.ItemBuilder;
 import com.alpsbte.navigator.core.hotbar.items.*;
-import com.alpsbte.navigator.utils.ItemBuilder;
 import com.alpsbte.navigator.NavigatorPlugin;
 import com.alpsbte.navigator.utils.Utils;
 import org.bukkit.Material;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.ipvp.canvas.Menu;
 import org.ipvp.canvas.mask.BinaryMask;
@@ -19,7 +15,6 @@ import org.ipvp.canvas.type.ChestMenu;
 public class NavigatorMenu {
     public Menu getUI(Player player) {
         Menu navigatorMenu = getMenu();
-        FileConfiguration config = NavigatorPlugin.getPlugin().getConfig();
 
         // Set glass border
         Mask mask = BinaryMask.builder(navigatorMenu)
@@ -60,7 +55,7 @@ public class NavigatorMenu {
         navigatorMenu.getSlot(15).setClickHandler((clickPlayer, clickInformation) -> {
             clickPlayer.closeInventory();
 
-            if(terra.serverIsOnline) {
+            if(terra.isServerOnline) {
                 clickPlayer.sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
                 NavigatorPlugin.getPlugin().connectPlayer(clickPlayer, Utils.TERRA_SERVER);
             } else {
@@ -94,7 +89,7 @@ public class NavigatorMenu {
         navigatorMenu.getSlot(22).setClickHandler((clickPlayer, clickInformation) -> {
             clickPlayer.closeInventory();
 
-            if(vienna.serverIsOnline) {
+            if(vienna.isServerOnline) {
                 clickPlayer.sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
                 NavigatorPlugin.getPlugin().connectPlayer(clickPlayer, Utils.VIENNA_SERVER);
             } else {
@@ -110,8 +105,7 @@ public class NavigatorMenu {
     public static ItemStack getItem() {
         return new ItemBuilder(Material.COMPASS, 1)
                 .setName("§b§lNavigator §7(Right Click)")
-                .setEnchantment(Enchantment.ARROW_DAMAGE)
-                .setItemFlag(ItemFlag.HIDE_ENCHANTS)
+                .setEnchanted(true)
                 .build();
     }
 

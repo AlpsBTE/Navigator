@@ -2,7 +2,7 @@ package com.alpsbte.navigator.core.holograms;
 
 import com.alpsbte.alpslib.hologram.HolographicDisplay;
 import com.alpsbte.navigator.NavigatorPlugin;
-import com.alpsbte.navigator.core.config.ConfigPaths;
+import com.alpsbte.navigator.utils.config.ConfigPaths;
 import com.alpsbte.navigator.utils.Utils;
 import me.filoghost.holographicdisplays.api.Position;
 import org.bukkit.Bukkit;

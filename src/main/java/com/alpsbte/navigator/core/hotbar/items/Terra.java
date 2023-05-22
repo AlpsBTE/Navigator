@@ -1,9 +1,9 @@
 package com.alpsbte.navigator.core.hotbar.items;
 
+import com.alpsbte.alpslib.utils.item.ItemBuilder;
 import com.alpsbte.navigator.NavigatorPlugin;
-import com.alpsbte.navigator.core.config.ConfigPaths;
-import com.alpsbte.navigator.utils.ItemBuilder;
-import com.alpsbte.navigator.utils.LoreBuilder;
+import com.alpsbte.navigator.utils.config.ConfigPaths;
+import com.alpsbte.navigator.utils.ServerLoreBuilder;
 import com.alpsbte.navigator.core.hotbar.NavigatorItem;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -63,12 +63,12 @@ public class Terra extends NavigatorItem {
     public ItemStack createItem() {
         return new ItemBuilder(getMaterial(), 1)
                 .setName(getTitle())
-                .setLore(new LoreBuilder()
+                .setLore(new ServerLoreBuilder()
                         .description(getDescription())
                         .emptyLine()
                         .features(getFeatures())
                         .emptyLine()
-                        .server(serverIsOnline, NavigatorPlugin.getPlugin().playerCountTERRA)
+                        .server(isServerOnline, NavigatorPlugin.getPlugin().playerCountTERRA)
                         .emptyLine()
                         .version(getVersion(), isModded())
                         .build())

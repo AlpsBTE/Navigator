@@ -7,14 +7,13 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 public abstract class NavigatorItem {
+    protected final FileConfiguration config;
+    public final boolean isServerOnline;
 
     public NavigatorItem() {
-        if(NavigatorPlugin.getPlugin().checkServer(getIP(), getPort())) serverIsOnline = true;
+        config = NavigatorPlugin.getPlugin().getConfig();
+        isServerOnline = NavigatorPlugin.getPlugin().checkServer(getIP(), getPort());
     }
-
-    public boolean serverIsOnline;
-
-    protected FileConfiguration config = NavigatorPlugin.getPlugin().getConfig();
 
     public abstract Material getMaterial();
 

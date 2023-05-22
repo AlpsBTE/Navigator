@@ -1,4 +1,4 @@
-package com.alpsbte.navigator.core.config;
+package com.alpsbte.navigator.utils.config;
 
 public class ConfigPaths {
 
@@ -40,7 +40,4 @@ public class ConfigPaths {
     public static final String HOLOGRAMS_X = ".x";
     public static final String HOLOGRAMS_Y = ".y";
     public static final String HOLOGRAMS_Z = ".z";
-
-    // Config
-    public static final String CONFIG_VERSION = "config-version";
 }

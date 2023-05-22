@@ -11,7 +11,7 @@ public class CMD_Navigator implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
         if(sender instanceof Player) {
             if(sender.hasPermission("alpsbte.navigator")) {
-                NavigatorPlugin.getPlugin().UpdatePlayerCount(((Player) sender).getPlayer());
+                NavigatorPlugin.getPlugin().updatePlayerCount(((Player) sender).getPlayer());
             }
         }
         return true;

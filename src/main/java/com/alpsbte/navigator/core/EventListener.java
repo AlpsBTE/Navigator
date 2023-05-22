@@ -1,7 +1,7 @@
 package com.alpsbte.navigator.core;
 
 import com.alpsbte.navigator.NavigatorPlugin;
-import com.alpsbte.navigator.core.config.ConfigPaths;
+import com.alpsbte.navigator.utils.config.ConfigPaths;
 import com.alpsbte.navigator.core.hotbar.NavigatorMenu;
 import com.alpsbte.navigator.core.hotbar.items.simplified.PlotSimplified;
 import com.alpsbte.navigator.core.hotbar.items.simplified.TerraSimplified;
@@ -91,19 +91,19 @@ public class EventListener implements Listener {
         if(event.getAction().equals(Action.RIGHT_CLICK_BLOCK) || event.getAction().equals(Action.RIGHT_CLICK_AIR)) {
             if(event.getItem() != null) {
                 if (event.getItem().equals(NavigatorMenu.getItem())) {
-                    NavigatorPlugin.getPlugin().UpdatePlayerCount(event.getPlayer());
+                    NavigatorPlugin.getPlugin().updatePlayerCount(event.getPlayer());
                 } else {
                     TerraSimplified terra = new TerraSimplified();
                     ViennaSimplified vienna = new ViennaSimplified();
                     if (event.getItem().equals(TerraSimplified.getItem())) {
-                        if (terra.serverIsOnline) {
+                        if (terra.isServerOnline) {
                             event.getPlayer().sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
                             NavigatorPlugin.getPlugin().connectPlayer(event.getPlayer(), Utils.TERRA_SERVER);
                         } else {
                             event.getPlayer().sendMessage(Utils.getErrorMessageFormat("Server is offline"));
                         }
                     } else if(event.getItem().equals(ViennaSimplified.getItem())) {
-                        if (vienna.serverIsOnline) {
+                        if (vienna.isServerOnline) {
                             event.getPlayer().sendMessage(Utils.getInfoMessageFormat("Connecting to server"));
                             NavigatorPlugin.getPlugin().connectPlayer(event.getPlayer(), Utils.VIENNA_SERVER);
                         } else {

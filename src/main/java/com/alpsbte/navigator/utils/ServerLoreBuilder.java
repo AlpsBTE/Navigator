@@ -3,11 +3,10 @@ package com.alpsbte.navigator.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoreBuilder {
-
+public class ServerLoreBuilder {
     private final List<String> lore = new ArrayList<>();
 
-    public LoreBuilder description(List<String> lines) {
+    public ServerLoreBuilder description(List<String> lines) {
         for(String line : lines) {
             lore.add("§7" + line);
         }
@@ -15,7 +14,7 @@ public class LoreBuilder {
         return this;
     }
 
-    public LoreBuilder server(boolean available, int players) {
+    public ServerLoreBuilder server(boolean available, int players) {
         if(available) {
             lore.add("§a§l>> Connect To Server <<");
             lore.add("§6" + players + " §7currently playing");
@@ -25,7 +24,7 @@ public class LoreBuilder {
         return this;
     }
 
-    public LoreBuilder features(List<String> lines) {
+    public ServerLoreBuilder features(List<String> lines) {
         if(lines == null) {
             lore.remove(lore.size() - 1);
         } else
@@ -37,7 +36,7 @@ public class LoreBuilder {
         return this;
     }
 
-    public LoreBuilder version(String version, boolean modded) {
+    public ServerLoreBuilder version(String version, boolean modded) {
         if(modded) {
             lore.add("§7Version: §6" + version + " §7| §bModpack Recommended");
         } else {
@@ -47,7 +46,7 @@ public class LoreBuilder {
         return this;
     }
 
-    public LoreBuilder emptyLine() {
+    public ServerLoreBuilder emptyLine() {
         lore.add("");
         return this;
     }

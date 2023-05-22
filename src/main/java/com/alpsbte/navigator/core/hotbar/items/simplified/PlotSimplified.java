@@ -1,9 +1,8 @@
 package com.alpsbte.navigator.core.hotbar.items.simplified;
 
-import com.alpsbte.navigator.NavigatorPlugin;
+import com.alpsbte.alpslib.utils.item.ItemBuilder;
 import com.alpsbte.navigator.core.hotbar.items.Plot;
-import com.alpsbte.navigator.utils.ItemBuilder;
-import com.alpsbte.navigator.utils.LoreBuilder;
+import com.alpsbte.navigator.utils.ServerLoreBuilder;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -40,7 +39,7 @@ public class PlotSimplified extends Plot {
     public ItemStack createItem() {
         return new ItemBuilder(getMaterial(), 1)
                 .setName(getTitle())
-                .setLore(new LoreBuilder()
+                .setLore(new ServerLoreBuilder()
                         .description(getDescription())
                         .emptyLine()
                         .features(getFeatures())
