@@ -1,6 +1,6 @@
 package com.alpsbte.navigator.utils;
 
-import com.alpsbte.navigator.core.config.ConfigPaths;
+import com.alpsbte.navigator.utils.config.ConfigPaths;
 import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import com.sk89q.worldedit.regions.Region;
@@ -61,7 +61,7 @@ public class PortalManager extends Thread {
         for (int i = min.getBlockX(); i <= max.getBlockX(); i++) {
             for (int j = min.getBlockY(); j <= max.getBlockY(); j++) {
                 for (int k = min.getBlockZ(); k <= max.getBlockZ(); k++) {
-                    packets.add(particle.setLocation(new Location(portalWorld, i, j, k)).toPacket());
+                    packets.add(particle.setLocation(new Location(portalWorld, i + 0.5, j, k + 0.5)).toPacket());
                 }
             }
         }
