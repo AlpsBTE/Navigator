@@ -6,7 +6,7 @@
 
     <groupId>com.alpsbte.navigator</groupId>
     <artifactId>AlpsBTE-Navigator</artifactId>
-    <version>4.2</version>
+    <version>4.3</version>
 
     <repositories>
         <!-- AlpsBTE Library -->

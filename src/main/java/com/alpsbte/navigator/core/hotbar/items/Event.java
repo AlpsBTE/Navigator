@@ -49,7 +49,7 @@ public class Event extends NavigatorItem {
 
     @Override
     public String getVersion() {
-        return "1.12.2 - 1.19";
+        return "1.12.2 - 1.20.1";
     }
 
     @Override

@@ -19,7 +19,7 @@ public class Vienna extends NavigatorItem {
 
     @Override
     public String getTitle() {
-        return "§b§lVIENNA 1.19 §c(NEW)";
+        return "§b§lVIENNA 1.20 §7(Click)";
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Vienna extends NavigatorItem {
 
     @Override
     public String getVersion() {
-        return "1.18 - 1.19";
+        return "1.18 - 1.20.1";
     }
 
     @Override
